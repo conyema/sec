@@ -1,0 +1,27 @@
+{
+  "name": "sec",
+  "version": "1.0.0",
+  "description": "An API for a Real Estate Agency",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/conyema/sec.git"
+  },
+  "keywords": [
+    "node",
+    "express"
+  ],
+  "author": "onyemachinedum@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/conyema/sec/issues"
+  },
+  "homepage": "https://github.com/conyema/sec#readme",
+  "devDependencies": {
+    "eslint": "^6.8.0"
+  }
+}
