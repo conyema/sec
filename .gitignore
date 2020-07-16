@@ -3,6 +3,11 @@ node_modules/
 npm-debug.log
 
 # Local development
+archive/
 *.env
 *.dev
 .DS_Store
+
+coverage
+bash.exe.stackdump
+.nyc_output

@@ -4,8 +4,9 @@
   "description": "An API for a Real Estate Agency",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint ."
+    "dev-test": "mocha api/tests/**/*.spec.js --exit",
+    "lint": "eslint .",
+    "test": "mocha api/tests/**/*.spec.js --exit"
   },
   "repository": {
     "type": "git",
@@ -13,7 +14,8 @@
   },
   "keywords": [
     "node",
-    "express"
+    "express",
+    "heroku"
   ],
   "author": "onyemachinedum@gmail.com",
   "license": "ISC",
@@ -22,6 +24,17 @@
   },
   "homepage": "https://github.com/conyema/sec#readme",
   "devDependencies": {
-    "eslint": "^6.8.0"
+    "chai": "^4.2.0",
+    "coveralls": "^3.0.11",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "mocha": "^7.1.1",
+    "nodemon": "^2.0.3",
+    "nyc": "^15.0.1",
+    "sinon": "^9.0.2"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
   }
 }
