@@ -1,11 +1,10 @@
-const createError = require("http-errors");
-const sinon = require('sinon');
-const { expect } = require('chai');
-// const chai = require("chai");
-// const expect = chai.expect;
+let sinon = require('sinon');
+let { expect } = require('chai');
+// let chai = require("chai");
+// let expect = chai.expect;
 
-const controller = require("../../api/estates/controllers");
-const services = require('../../api/estates/services');
+let controller = require("../../api/estates/controllers");
+let services = require('../../api/estates/services');
 
 describe('Estate controller tests:', () => {
   beforeEach(async () => {
@@ -22,13 +21,13 @@ describe('Estate controller tests:', () => {
       let next = sinon.spy();
 
       // create a stub to fake the database query service response
-      sinon.stub(services, 'fetchAllEstates').returns(Promise.resolve(
+      sinon.stub(services, 'selectAllEstates').returns(Promise.resolve(
         [{ articleid: 22, name: 'House', createdon: '2019-02-11' }],
       ));
 
       await controller.getAllEstates(req, res, next);
 
-      // assertions for succesful response
+      // assertions for successful response
       expect(res.status.calledOnce).to.equal(true);
       expect(res.json.calledOnce).to.equal(true);
       expect(res.status.args[0][0]).to.equal(200);
@@ -40,7 +39,7 @@ describe('Estate controller tests:', () => {
       let res = { status: sinon.spy(), json: sinon.spy() };
       let next = sinon.spy();
 
-      sinon.stub(services, 'fetchAllEstates').returns(Promise.resolve([]));
+      sinon.stub(services, 'selectAllEstates').returns(Promise.resolve([]));
 
       await controller.getAllEstates(req, res, next);
 
@@ -55,8 +54,8 @@ describe('Estate controller tests:', () => {
       let res = { status: sinon.spy(), json: sinon.spy() };
       let next = sinon.spy();
 
-      sinon.stub(services, 'fetchAllEstates').returns(Promise.reject());
-      // sinon.stub(services, 'fetchAllEstates').rejects( new Error('errr'));
+      sinon.stub(services, 'selectAllEstates').returns(Promise.reject());
+      // sinon.stub(services, 'selectAllEstates').rejects( new Error('errr'));
 
       await controller.getAllEstates(req, res, next);
 

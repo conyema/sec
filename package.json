@@ -2,11 +2,19 @@
   "name": "sec",
   "version": "1.0.0",
   "description": "An API for a Real Estate Agency",
+  "engines": {
+    "node": "12.18.2"
+  },
   "main": "server.js",
   "scripts": {
-    "dev-test": "mocha api/tests/**/*.spec.js --exit",
     "lint": "eslint .",
-    "test": "mocha api/tests/**/*.spec.js --exit"
+    "seq-init": "sequelize init",
+    "seq-model": "npx sequelize model:generate --name property --attributes name:string,cityId:integer,estateTypeId:integer,floorSpace:decimal,balcony:integer,balconySpace:decimal,bedroom:integer,bathroom:integer,garage:integer,parkingSpace:integer,petsAllowed:boolean,thumnailUrl:string,description:text,statusId:integer --force",
+    "setup-db": "node api/db/setup.js",
+    "start": "pm2 start ./api/app.js --name sec-api",
+    "start-dev": "set DEBUG=app:* & nodemon ./api/app.js",
+    "test": "mocha test/**/*.spec.js --exit",
+    "test-dev": "mocha api/tests/**/*.spec.js --exit"
   },
   "repository": {
     "type": "git",
@@ -30,11 +38,26 @@
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2",
     "mocha": "^7.1.1",
-    "nodemon": "^2.0.3",
+    "nodemon": "^2.0.4",
     "nyc": "^15.0.1",
-    "sinon": "^9.0.2"
+    "sinon": "^9.0.2",
+    "supertest": "^4.0.2"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "body-parser": "^1.19.0",
+    "cloudinary": "^1.22.0",
+    "cors": "^2.8.5",
+    "debug": "^4.1.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.7-alpha.4",
+    "http-errors": "^1.8.0",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0",
+    "pg": "^8.3.0",
+    "pg-hstore": "^2.3.3",
+    "pm2": "^4.4.0",
+    "sequelize": "^6.3.3",
+    "sequelize-cli": "^6.2.0"
   }
 }
