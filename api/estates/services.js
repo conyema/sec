@@ -1,8 +1,14 @@
-// const models = require('../database/models')
-// const debug = require("debug")("app:estate-service");
-// const { sequelize } = require("../database/models/index");
+const cloudinary = require('cloudinary').v2;
+const dotenv = require('dotenv');
+
 const { query } = require('../db/config');
 
+dotenv.config();
+cloudinary.config({
+  cloud_name: 'owi',
+  api_key: '139187219659792',
+  api_secret: process.env.API_SECRET,
+});
 
 /**
  * Handle database and external API calls here
@@ -26,6 +32,10 @@ const selectAllEstates = () => {
   // return await client.query(`SELECT * FROM estate LIMIT 20`);
   return  query(`SELECT * FROM employee LIMIT 20`);
 }
+
+// const selectAllEstates = () => {
+//   return  query(`SELECT * FROM employee LIMIT 20`);
+// }
 
 module.exports = {
   selectAllEstates,

@@ -5,17 +5,17 @@ const services = require("./services");
 
 const getAllEstates = async (req, res, next) => {
   try {
-    const estates = await services.selectAllEstates();
-    // console.log('at cont', estates[0]);
+    const {rows} = await services.selectAllEstates();
+    // const estates = result.rows
 
-    if (!estates[0]) {
+    if (!rows[0]) {
       return next(createError(404, 'Estates not found'));
     }
 
     res.status(200);
     return res.json({
       status: 'success',
-      data: estates
+      data: rows
     });
   } catch (err) {
     debug(err);

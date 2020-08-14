@@ -46,5 +46,6 @@ testDatabase();
 
 module.exports = {
   // query: (text, params) => pool.query(text, params),
-  query
+  query,
+  pool
 }

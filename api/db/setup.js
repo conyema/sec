@@ -1,4 +1,4 @@
-const pool = require('./config');
+const { pool } = require('./config');
 
 const createEmployeeTable = async () => {
   const client = await pool.connect();
@@ -29,11 +29,11 @@ const insertAdmin = async () => {
   const client = await pool.connect();
   try {
     const result = await client.query(`
-      INSERT INTO employees
+      INSERT INTO employee
         (firstName, lastName, email, password, gender, role, address, isadmin)
       VALUES
         ('Chinedum', 'Onyema', 'onyemachinedum@gmail.com', '$2b$10$TImj.7e.zhDgBdoYZItwXek6iPsyfRy867I3monPu2nSAmjUM72v2', 'male', 'admin', 'Abuja', true)
-      RETURNING userId
+      RETURNING employeeId
       `);
     console.log('Insertion successful', result);
   } catch (err) {
@@ -170,16 +170,17 @@ const createEstateTable = async () => {
 };
 
 try {
-  createEmployeeTable();
-  createLocationTable();
-  createClientTable();
-  createEstateStatusTable();
-  createInChargeTable();
-  createEstateTable()
-  createEstateTypeTable();
+  // createEmployeeTable();
+  // createLocationTable();
+  // createClientTable();
+  // createEstateStatusTable();
+  // createInChargeTable();
+  // createEstateTable()
+  // createEstateTypeTable();
+  insertAdmin();
 } catch (error) {
   console.log(error);
 } finally {
-  insertAdmin();
+  // insertAdmin();
   console.log("Database Transactions")
 }
