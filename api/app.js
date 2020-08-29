@@ -1,14 +1,14 @@
 const express = require("express");
-// const bodyParser = require("body-parser");
 const cors = require("cors");
-const logger = require("morgan")
 const dotenv = require('dotenv');
 const debug = require('debug')('app:server');
 // const fileUpload = require("express-fileupload");
+const logger = require("morgan");
 
 // const estates = require("./estate/routes");
 const routes = require("./routes/index");
 const errorHandler = require("./util/errorHandler");
+// const parseForm = require("./util/parseForm");
 
 const app = express();
 dotenv.config();
@@ -21,11 +21,13 @@ app.use(express.json());
 app.use(
   express.urlencoded({
     extended: true,
-  }),
+  })
 );
 
+// app.use(parseForm);
 // app.use(fileUpload({
 //   useTempFiles: true,
+//   safeFileNames: true,
 // }));
 
 // Routes to features

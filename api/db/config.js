@@ -38,7 +38,19 @@ const testDatabase = async () => {
   }
 };
 
-const query = (text, params) => {
+const clientQuery = async (queryText) => {
+  const client = await pool.connect();
+  try {
+    await client.query(queryText);
+  } catch (err) {
+    console.error(err);
+  } finally {
+    client.release();
+  }
+};
+
+
+const poolQuery = (text, params) => {
   return pool.query(text, params);
 }
 
@@ -46,5 +58,7 @@ testDatabase();
 
 module.exports = {
   // query: (text, params) => pool.query(text, params),
-  query
+  clientQuery,
+  poolQuery,
+  pool
 }
