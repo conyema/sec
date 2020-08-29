@@ -48,7 +48,7 @@ describe('Estate controller tests:', () => {
       // assertions for empty response
       expect(next.calledOnce).to.equal(true);
       expect(next.args[0][0].status).to.equal(404);
-      expect(next.args[0][0].message).to.equal('Estates not found');
+      expect(next.args[0][0].message).to.equal('No estate available yet');
     });
 
     it('should handle server error', async () => {
@@ -66,37 +66,37 @@ describe('Estate controller tests:', () => {
     });
   });
 
-  // describe('create-estate', () => {
-  //   it('should create an Estate', async () => {
-  //     let req = {};
-  //     let res = { status: sinon.spy(), json: sinon.spy() };
-  //     let next = sinon.spy();
+  describe('create-estate', () => {
+    it('should create an Estate', async () => {
+      let req = { files: {} };
+      let res = { status: sinon.spy(), json: sinon.spy() };
+      let next = sinon.spy();
 
-  //     // create a stub to fake the database query service response
-  //     sinon.stub(services, 'createEstate').returns(Promise.resolve(
-  //       [{ estateID: 3, name: 'Harmony Court'}],
-  //     ));
+      // create a stub to fake the database query service response
+      sinon.stub(services, 'createEstate').returns(Promise.resolve(
+        [{ estateID: 3, name: 'Harmony Court'}],
+      ));
 
-  //     await controller.postEstate(req, res, next);
+      await controller.postEstate(req, res, next);
 
-  //     // assertions for successful response
-  //     expect(res.status.calledOnce).to.equal(true);
-  //     expect(res.json.calledOnce).to.equal(true);
-  //     expect(res.status.args[0][0]).to.equal(200);
-  //     expect(res.json.args[0][0]).to.be.an('object').that.has.all.keys('status', 'data');
-  //   });
+      // assertions for successful creation
+      expect(res.status.calledOnce).to.equal(true);
+      expect(res.json.calledOnce).to.equal(true);
+      expect(res.status.args[0][0]).to.equal(201);
+      expect(res.json.args[0][0]).to.be.an('object').that.has.all.keys('status', 'data');
+    });
 
-  //   it('should handle server error', async () => {
-  //     let req = {};
-  //     let res = { status: sinon.spy(), json: sinon.spy() };
-  //     let next = sinon.spy();
+    it('should handle server error', async () => {
+      let req = { files: {} };
+      let res = { status: sinon.spy(), json: sinon.spy() };
+      let next = sinon.spy();
 
-  //     sinon.stub(services, 'createEstate').returns(Promise.reject());
+      sinon.stub(services, 'createEstate').returns(Promise.reject());
 
-  //     await controller.postEstate(req, res, next);
+      await controller.postEstate(req, res, next);
 
-  //     // assertions for server error
-  //     expect(next.calledOnce).to.equal(true);
-  //   });
-  // });
+      // assertions for server error
+      expect(next.calledOnce).to.equal(true);
+    });
+  });
 });

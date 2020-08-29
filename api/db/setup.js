@@ -1,4 +1,4 @@
-const { pool } = require('./config');
+const { pool, clientQuery } = require('./config');
 
 const createEmployeeTable = async () => {
   const client = await pool.connect();
@@ -147,8 +147,10 @@ const createEstateTable = async () => {
       `CREATE TABLE IF NOT EXISTS estate (
         estateID SERIAL PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
+        desciption TEXT NOT NULL
         locationID INTEGER NOT NULL REFERENCES location,
         estateTypeID INTEGER NOT NULL REFERENCES estateType,
+        estateStatusID INTEGER NOT NULL REFERENCES estateStatus,
         floorSpace NUMERIC(8,2),
         balcony INTEGER,
         balconySpace NUMERIC(8,2),
@@ -156,9 +158,7 @@ const createEstateTable = async () => {
         bathroom INTEGER,
         garage INTEGER,
         parkingSpace INTEGER,
-        petsAllowed BOOLEAN DEFAULT false,
-        desciption TEXT NOT NULL,
-        estateStatusID INTEGER NOT NULL REFERENCES estateStatus
+        petsAllowed BOOLEAN DEFAULT false
       )`
     );
     console.log(result);
@@ -169,6 +169,13 @@ const createEstateTable = async () => {
   }
 };
 
+const alterEstate = `
+  ALTER TABLE estate
+  ADD COLUMN thumbnailUrl VARCHAR NOT NULL,
+  ADD COLUMN thumbnailID VARCHAR NOT NULL,
+  ADD COLUMN media JSONB`;
+
+
 try {
   // createEmployeeTable();
   // createLocationTable();
@@ -177,7 +184,8 @@ try {
   // createInChargeTable();
   // createEstateTable()
   // createEstateTypeTable();
-  insertAdmin();
+  // insertAdmin();
+  clientQuery(alterEstate);
 } catch (error) {
   console.log(error);
 } finally {
