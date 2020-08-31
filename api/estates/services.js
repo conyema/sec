@@ -1,4 +1,4 @@
-const { uploadOneFile } = require('../util/fileStore')
+// const { uploadOneFile } = require('../util/fileStore')
 const { poolQuery } = require('../db/config');
 
 /**
@@ -24,7 +24,7 @@ const createEstate = async (data) => {
     INSERT INTO estate
       (name, description, locationId, estateTypeId, estateStatusId, floorSpace, balcony, balconySpace, bedroom, bathroom, garage, parkingSpace, petsAllowed)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
-    RETURNING estateId, name`,
+    RETURNING estateId, name;`,
     [name, description, locationId, estateTypeId, estateStatusId, floorSpace, balcony, balconySpace, bedroom, bathroom, garage, parkingSpace, petsAllowed]
   );
 }
@@ -37,13 +37,23 @@ const updateEstate = async (id, data) => {
       SET name = $1, description = $2, locationId = $3, estateTypeId = $4, estateStatusId = $5, floorSpace = $6,
       balcony = $7, balconySpace = $8, bedroom = $9, bathroom = $10, garage = $11, parkingSpace = $12, petsAllowed = $13
     WHERE estateId = $14
-    RETURNING *`,
+    RETURNING *;`,
     [name, description, locationId, estateTypeId, estateStatusId, floorSpace, balcony, balconySpace, bedroom, bathroom, garage, parkingSpace, petsAllowed, id]
+  );
+}
+
+const deleteEstate = async (id) => {
+
+  return  poolQuery(`
+    DELETE FROM estate
+    WHERE estateId = $1;`,
+    [id]
   );
 }
 
 module.exports = {
   createEstate,
+  deleteEstate,
   selectAllEstates,
   updateEstate
 }

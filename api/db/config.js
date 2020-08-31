@@ -40,7 +40,41 @@ const clientQuery = async (queryText) => {
 
 const poolQuery = (text, params) => {
   return pool.query(text, params);
-}
+};
+
+// const getAllEntity = (id, entity, limit='ALL') => {
+//   return pool.query(
+//     `SELECT *
+//     FROM ${entity}
+//     ORDER BY ${entity}Id
+//     LIMIT ${limit};`
+//   );
+// };
+
+// const getOneEntity = (id, entity, limit='ALL') => {
+//   return pool.query(
+//     `SELECT *
+//     FROM ${entity}
+//     WHERE ${entity}Id = ${id};`
+//   );
+// };
+
+// const deleteAllEntity = (id, entity, limit='ALL') => {
+//   return pool.query(
+//     `SELECT *
+//     FROM ${entity}
+//     ORDER BY ${entity}Id
+//     LIMIT ${limit};`
+//   );
+// };
+
+// const deleteOneEntity = (id, entity, limit='ALL') => {
+//   return pool.query(
+//     `DELETE *
+//     FROM ${entity}
+//     WHERE ${entity}Id = ${id};`
+//   );
+// };
 
 // test database connection
 testDatabase();
@@ -48,6 +82,10 @@ testDatabase();
 module.exports = {
   // query: (text, params) => pool.query(text, params),
   clientQuery,
+  // deleteAllEntity,
+  // deleteOneEntity,
+  // getAllEntity,
+  // getOneEntity,
   poolQuery,
   pool
 }
