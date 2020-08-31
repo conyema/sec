@@ -17,19 +17,15 @@ const selectAllEstates = async () => {
   `);
 }
 
-const createEstate = async (data, image) => {
-  const { public_id: thumbnailId, secure_url: thumbnailUrl } = await uploadOneFile(image);
+const createEstate = async (data) => {
   const { name, description, locationId, estateTypeId, estateStatusId, floorSpace, balcony, balconySpace, bedroom, bathroom, garage, parkingSpace, petsAllowed } = data;
-
-  // console.log(public_Id, secure_url);
-  console.log(data)
 
   return  poolQuery(`
     INSERT INTO estate
-      (name, description, locationId, estateTypeId, estateStatusId, thumbnailId, thumbnailUrl, floorSpace, balcony, balconySpace, bedroom, bathroom, garage, parkingSpace, petsAllowed)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
+      (name, description, locationId, estateTypeId, estateStatusId, floorSpace, balcony, balconySpace, bedroom, bathroom, garage, parkingSpace, petsAllowed)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
     RETURNING estateId, name`,
-    [name, description, locationId, estateTypeId, estateStatusId, thumbnailId, thumbnailUrl, floorSpace, balcony, balconySpace, bedroom, bathroom, garage, parkingSpace, petsAllowed]
+    [name, description, locationId, estateTypeId, estateStatusId, floorSpace, balcony, balconySpace, bedroom, bathroom, garage, parkingSpace, petsAllowed]
   );
 }
 

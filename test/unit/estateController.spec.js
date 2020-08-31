@@ -68,8 +68,11 @@ describe('Estate controller tests:', () => {
 
   describe('POST /estates', () => {
     it('should create an Estate', async () => {
-      const req = { files: {} };
-      const res = { status: sinon.spy(), json: sinon.spy() };
+      const req = { fields: {} };
+      const res = {
+        status: sinon.spy(),
+        json: sinon.spy()
+      };
       const next = sinon.spy();
 
       // create a stub to fake the database query service response
@@ -87,8 +90,11 @@ describe('Estate controller tests:', () => {
     });
 
     it('should handle server error', async () => {
-      const req = { files: {} };
-      const res = { status: sinon.spy(), json: sinon.spy() };
+      const req = { fields: {} };
+      const res = {
+        status: sinon.spy(),
+        json: sinon.spy()
+      };
       const next = sinon.spy();
 
       sinon.stub(services, 'createEstate').returns(Promise.reject());

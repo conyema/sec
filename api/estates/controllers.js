@@ -25,12 +25,11 @@ const getAllEstates = async (req, res, next) => {
 }
 
 const postEstate = async (req, res, next) => {
-  const { thumbnail } = req.files;
   const data = req.fields;
 
   try {
     // const { rows } = await services.createEstate();
-    const { rows } = await services.createEstate(data, thumbnail);
+    const { rows } = await services.createEstate(data);
 
     res.status(201);
     return res.json({
