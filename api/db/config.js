@@ -1,5 +1,5 @@
 const { Pool } = require('pg');
-// const debug = require('debug')('app:database');
+const debug = require('debug')('app:database');
 const dotenv = require('dotenv');
 
 dotenv.config();
@@ -22,20 +22,8 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const testDatabase = async () => {
-  const client = await pool.connect();
-  try {
-  // const client = new pg.Client(pool);
-    client.query('SELECT NOW() AS "theTime"', (error) => {
-      if (error) {
-        return console.log('error running query', error);
-      }
-      console.log('Database Connected');
-    });
-  } catch (error) {
-    console.log(error);
-  } finally {
-    client.release();
-  }
+  await clientQuery('SELECT NOW() AS "theTime"')
+  .then(debug('DB connected'));
 };
 
 const clientQuery = async (queryText) => {
@@ -43,7 +31,7 @@ const clientQuery = async (queryText) => {
   try {
     await client.query(queryText);
   } catch (err) {
-    console.error(err);
+    debug(err);
   } finally {
     client.release();
   }
@@ -54,6 +42,7 @@ const poolQuery = (text, params) => {
   return pool.query(text, params);
 }
 
+// test database connection
 testDatabase();
 
 module.exports = {
