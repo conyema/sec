@@ -17,24 +17,33 @@ const selectAllEstates = async () => {
   `);
 }
 
-const createEstate = async (data, image) => {
-  const { public_id: thumbnailId, secure_url: thumbnailUrl } = await uploadOneFile(image);
+const createEstate = async (data) => {
   const { name, description, locationId, estateTypeId, estateStatusId, floorSpace, balcony, balconySpace, bedroom, bathroom, garage, parkingSpace, petsAllowed } = data;
-
-  // console.log(public_Id, secure_url);
-  console.log(data)
 
   return  poolQuery(`
     INSERT INTO estate
-      (name, description, locationId, estateTypeId, estateStatusId, thumbnailId, thumbnailUrl, floorSpace, balcony, balconySpace, bedroom, bathroom, garage, parkingSpace, petsAllowed)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
+      (name, description, locationId, estateTypeId, estateStatusId, floorSpace, balcony, balconySpace, bedroom, bathroom, garage, parkingSpace, petsAllowed)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
     RETURNING estateId, name`,
-    [name, description, locationId, estateTypeId, estateStatusId, thumbnailId, thumbnailUrl, floorSpace, balcony, balconySpace, bedroom, bathroom, garage, parkingSpace, petsAllowed]
+    [name, description, locationId, estateTypeId, estateStatusId, floorSpace, balcony, balconySpace, bedroom, bathroom, garage, parkingSpace, petsAllowed]
   );
+}
 
+const updateEstate = async (id, data) => {
+  const { name, description, locationId, estateTypeId, estateStatusId, floorSpace, balcony, balconySpace, bedroom, bathroom, garage, parkingSpace, petsAllowed } = data;
+
+  return  poolQuery(`
+    UPDATE estate
+      SET name = $1, description = $2, locationId = $3, estateTypeId = $4, estateStatusId = $5, floorSpace = $6,
+      balcony = $7, balconySpace = $8, bedroom = $9, bathroom = $10, garage = $11, parkingSpace = $12, petsAllowed = $13
+    WHERE estateId = $14
+    RETURNING *`,
+    [name, description, locationId, estateTypeId, estateStatusId, floorSpace, balcony, balconySpace, bedroom, bathroom, garage, parkingSpace, petsAllowed, id]
+  );
 }
 
 module.exports = {
   createEstate,
-  selectAllEstates
+  selectAllEstates,
+  updateEstate
 }
