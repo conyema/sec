@@ -12,3 +12,4 @@ coverage
 bash.exe.stackdump
 .nyc_output
 api/database
+api/db

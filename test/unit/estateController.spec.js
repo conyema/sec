@@ -144,7 +144,7 @@ describe('Estate controller tests:', () => {
       const next = sinon.spy();
 
       sinon.stub(services, 'updateEstate').returns(Promise.resolve({
-        rowCount: 0,
+        rowCount: 0
       }));
 
       await controller.editEstate(req, res, next);
@@ -169,6 +169,72 @@ describe('Estate controller tests:', () => {
       sinon.stub(services, 'updateEstate').returns(Promise.reject());
 
       await controller.editEstate(req, res, next);
+
+      // assertions for server error
+      expect(next.calledOnce).to.equal(true);
+    });
+  });
+
+  describe('DELETE /estate/:id', () => {
+    it('should delete an Estate', async () => {
+      const req = {
+        params: { id: '3' }
+      };
+      const res = {
+        status: sinon.spy(),
+        json: sinon.spy()
+      };
+      const next = sinon.spy();
+
+      // create a stub to fake the database query service response
+      sinon.stub(services, 'deleteEstate').returns(Promise.resolve({
+        rowCount: 1,
+      }));
+
+      await controller.deleteEstate(req, res, next);
+
+      // assertions for successful creation
+      expect(res.status.calledOnce).to.equal(true);
+      expect(res.json.calledOnce).to.equal(true);
+      expect(res.status.args[0][0]).to.equal(200);
+      expect(res.json.args[0][0]).to.be.an('object').that.has.all.keys('status', 'message');
+    });
+
+    it('should not delete a non-existent estate', async () => {
+      const req = {
+        params: { id: '122' },
+      };
+      const res = {
+        status: sinon.spy(),
+        json: sinon.spy()
+      };
+      const next = sinon.spy();
+
+      sinon.stub(services, 'deleteEstate').returns(Promise.resolve({
+        rowCount: 0,
+      }));
+
+      await controller.deleteEstate(req, res, next);
+
+      // assertions for empty response
+      expect(next.calledOnce).to.equal(true);
+      expect(next.args[0][0].status).to.equal(404);
+      expect(next.args[0][0].message).to.equal('Estate does not exist');
+    });
+
+    it('should handle server error', async () => {
+      const req = {
+        params: { id: '3' },
+      };
+      const res = {
+        status: sinon.spy(),
+        json: sinon.spy()
+      };
+      const next = sinon.spy();
+
+      sinon.stub(services, 'deleteEstate').returns(Promise.reject());
+
+      await controller.deleteEstate(req, res, next);
 
       // assertions for server error
       expect(next.calledOnce).to.equal(true);
