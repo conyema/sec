@@ -7,18 +7,31 @@ const { poolQuery } = require('../db/config');
 
 const selectAllEstates = async () => {
   return  poolQuery(`
-  SELECT estateId, e.name, description, l.city, et.type, es.status
-  FROM estate e
-  INNER JOIN location l USING(locationId)
-  INNER JOIN estateType et USING(estateTypeId)
-  INNER JOIN estateStatus es USING(estatestatusId)
+  SELECT estateId, name, description, city, type, status
+  FROM estate
+  INNER JOIN location USING(locationId)
+  INNER JOIN estateType USING(estateTypeId)
+  INNER JOIN estateStatus USING(estatestatusId)
   ORDER BY estateId
   LIMIT 20;
   `);
 }
 
+const selectOneEstate = async (id) => {
+
+  return  poolQuery(`
+    SELECT estateId, name, city, type, status, description, bedroom, bathroom, balcony, balconySpace, garage, parkingSpace, petsAllowed
+    FROM estate
+    INNER JOIN location l USING(locationId)
+    INNER JOIN estateType et USING(estateTypeId)
+    INNER JOIN estateStatus es USING(estatestatusId)
+    WHERE estateId = $1;`,
+    [id]
+  );
+}
+
 const createEstate = async (data) => {
-  const { name, description, locationId, estateTypeId, estateStatusId, floorSpace, balcony, balconySpace, bedroom, bathroom, garage, parkingSpace, petsAllowed } = data;
+  const { name, description, locationId, estateTypeId, estateStatusId, floorSpace, balcony, balconySpace, bedroom, bathroom, garage, parkingSpace, petsAllowed = false} = data;
 
   return  poolQuery(`
     INSERT INTO estate
@@ -51,9 +64,11 @@ const deleteEstate = async (id) => {
   );
 }
 
+
 module.exports = {
   createEstate,
   deleteEstate,
   selectAllEstates,
+  selectOneEstate,
   updateEstate
 }

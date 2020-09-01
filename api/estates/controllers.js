@@ -24,6 +24,27 @@ const getAllEstates = async (req, res, next) => {
   }
 }
 
+const getOneEstate = async (req, res, next) => {
+  const id = req.params.id;
+
+  try {
+    const { rows, rowCount } = await services.selectOneEstate(id);
+
+    if (rowCount === 0) {
+      return next(createError(404, 'Estate does not exist'));
+    }
+
+    res.status(200);
+    return res.json({
+      status: 'success',
+      data: rows
+    });
+  } catch (err) {
+    debug(err);
+    next(err);
+  }
+}
+
 const postEstate = async (req, res, next) => {
   const data = req.fields;
 
@@ -92,5 +113,6 @@ module.exports = {
   deleteEstate,
   editEstate,
   getAllEstates,
+  getOneEstate,
   postEstate
 };
