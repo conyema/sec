@@ -1,5 +1,6 @@
-// const { uploadOneFile } = require('../util/fileStore')
-const { poolQuery } = require('../db/config');
+const { uploadOneFile } = require('../util/fileStore');
+const renameFile = require('../util/renameFile');
+const { poolQuery,getOneEntity } = require('../db/config');
 
 /**
  * Handle database and external API calls here
@@ -64,11 +65,34 @@ const deleteEstate = async (id) => {
   );
 }
 
+const uploadFile = async (id, image, tag) => {
+  // check id validity before file(s) upload
+  const result = await getOneEntity(id, 'estate', 'estateId');
+  const safeTag = `${renameFile(tag)}${id}` ;
+
+
+  if ( result.rowCount === 0 ) {
+    return result;
+  } else {
+    const uploadData = await uploadOneFile(image, safeTag);
+    const  value = `${uploadData}`;
+    const path = `{${safeTag}}`;
+
+    return  poolQuery(`
+      UPDATE estate
+      SET media = jsonb_set(media, $2, $3)
+      WHERE estateId = $1
+      RETURNING estateId, name, media;`,
+      [id, path, value]
+    );
+  }
+}
 
 module.exports = {
   createEstate,
   deleteEstate,
   selectAllEstates,
   selectOneEstate,
-  updateEstate
+  updateEstate,
+  uploadFile,
 }
