@@ -1,6 +1,7 @@
 const { uploadOneFile } = require('../util/fileStore');
 const renameFile = require('../util/renameFile');
-const { poolQuery,getOneEntity } = require('../db/config');
+const { poolQuery, getOneEntity } = require('../db/config');
+// const { json } = require('express');
 
 /**
  * Handle database and external API calls here
@@ -8,7 +9,7 @@ const { poolQuery,getOneEntity } = require('../db/config');
 
 const selectAllEstates = async () => {
   return  poolQuery(`
-  SELECT estateId, name, description, city, type, status
+  SELECT estateId, name, description, city, type, status, media -> 'poster' AS poster
   FROM estate
   INNER JOIN location USING(locationId)
   INNER JOIN estateType USING(estateTypeId)
@@ -21,7 +22,7 @@ const selectAllEstates = async () => {
 const selectOneEstate = async (id) => {
 
   return  poolQuery(`
-    SELECT estateId, name, city, type, status, description, bedroom, bathroom, balcony, balconySpace, garage, parkingSpace, petsAllowed
+    SELECT estateId, name, city, type, status, description, bedroom, bathroom, balcony, balconySpace, garage, parkingSpace, petsAllowed, media
     FROM estate
     INNER JOIN location l USING(locationId)
     INNER JOIN estateType et USING(estateTypeId)
@@ -65,25 +66,27 @@ const deleteEstate = async (id) => {
   );
 }
 
-const uploadFile = async (id, image, tag) => {
+const uploadFile = async (id, path, tag) => {
   // check id validity before file(s) upload
   const result = await getOneEntity(id, 'estate', 'estateId');
-  const safeTag = `${renameFile(tag)}${id}` ;
+  const safeTag = renameFile(tag);
+  const safeTagId = `${renameFile(tag)}${id}`;
 
 
   if ( result.rowCount === 0 ) {
     return result;
   } else {
-    const uploadData = await uploadOneFile(image, safeTag);
-    const  value = `${uploadData}`;
-    const path = `{${safeTag}}`;
+    // upload file with tag nad ID for unique identification
+    const uploadData = await uploadOneFile(path, safeTagId);
+    const  jsonValue = `${uploadData}`;
+    const jsonPath = `{${safeTag}}`;
 
     return  poolQuery(`
       UPDATE estate
-      SET media = jsonb_set(media, $2, $3)
+      SET media = jsonb_set(coalesce(media, '{}'), $2, $3)
       WHERE estateId = $1
       RETURNING estateId, name, media;`,
-      [id, path, value]
+      [id, jsonPath, jsonValue]
     );
   }
 }
