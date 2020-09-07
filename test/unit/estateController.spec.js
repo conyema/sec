@@ -1,3 +1,4 @@
+const fs = require('fs');
 const sinon = require('sinon');
 const { expect } = require('chai');
 // const chai = require("chai");
@@ -27,7 +28,7 @@ describe('Estate controller tests:', () => {
 
       await controller.getAllEstates(req, res, next);
 
-      // assertions for successful response
+      // assertions
       expect(res.status.calledOnce).to.equal(true);
       expect(res.json.calledOnce).to.equal(true);
       expect(res.status.args[0][0]).to.equal(200);
@@ -45,7 +46,7 @@ describe('Estate controller tests:', () => {
 
       await controller.getAllEstates(req, res, next);
 
-      // assertions for empty response
+      // assertions
       expect(next.calledOnce).to.equal(true);
       expect(next.args[0][0].status).to.equal(404);
       expect(next.args[0][0].message).to.equal('No estate available yet');
@@ -61,7 +62,7 @@ describe('Estate controller tests:', () => {
 
       await controller.getAllEstates(req, res, next);
 
-      // assertions for server error
+      // assertions
       expect(next.calledOnce).to.equal(true);
     });
   });
@@ -82,7 +83,7 @@ describe('Estate controller tests:', () => {
 
       await controller.postEstate(req, res, next);
 
-      // assertions for successful creation
+      // assertions
       expect(res.status.calledOnce).to.equal(true);
       expect(res.json.calledOnce).to.equal(true);
       expect(res.status.args[0][0]).to.equal(201);
@@ -101,12 +102,12 @@ describe('Estate controller tests:', () => {
 
       await controller.postEstate(req, res, next);
 
-      // assertions for server error
+      // assertions
       expect(next.calledOnce).to.equal(true);
     });
   });
 
-  describe('PATCH /estate/:id', () => {
+  describe('PATCH /estates/:id', () => {
     it('should update an Estate', async () => {
       const req = {
         params: { id: '3' },
@@ -125,7 +126,7 @@ describe('Estate controller tests:', () => {
 
       await controller.editEstate(req, res, next);
 
-      // assertions for successful creation
+      // assertions
       expect(res.status.calledOnce).to.equal(true);
       expect(res.json.calledOnce).to.equal(true);
       expect(res.status.args[0][0]).to.equal(200);
@@ -149,7 +150,7 @@ describe('Estate controller tests:', () => {
 
       await controller.editEstate(req, res, next);
 
-      // assertions for empty response
+      // assertions
       expect(next.calledOnce).to.equal(true);
       expect(next.args[0][0].status).to.equal(404);
       expect(next.args[0][0].message).to.equal('Estate does not exist');
@@ -170,12 +171,12 @@ describe('Estate controller tests:', () => {
 
       await controller.editEstate(req, res, next);
 
-      // assertions for server error
+      // assertions
       expect(next.calledOnce).to.equal(true);
     });
   });
 
-  describe('DELETE /estate/:id', () => {
+  describe('DELETE /estates/:id', () => {
     it('should delete an Estate', async () => {
       const req = {
         params: { id: '3' }
@@ -193,7 +194,7 @@ describe('Estate controller tests:', () => {
 
       await controller.deleteEstate(req, res, next);
 
-      // assertions for successful creation
+      // assertions
       expect(res.status.calledOnce).to.equal(true);
       expect(res.json.calledOnce).to.equal(true);
       expect(res.status.args[0][0]).to.equal(200);
@@ -216,7 +217,7 @@ describe('Estate controller tests:', () => {
 
       await controller.deleteEstate(req, res, next);
 
-      // assertions for empty response
+      // assertions
       expect(next.calledOnce).to.equal(true);
       expect(next.args[0][0].status).to.equal(404);
       expect(next.args[0][0].message).to.equal('Estate does not exist');
@@ -236,7 +237,7 @@ describe('Estate controller tests:', () => {
 
       await controller.deleteEstate(req, res, next);
 
-      // assertions for server error
+      // assertions
       expect(next.calledOnce).to.equal(true);
     });
   });
@@ -260,7 +261,7 @@ describe('Estate controller tests:', () => {
 
       await controller.getOneEstate(req, res, next);
 
-      // assertions for successful creation
+      // assertions
       expect(res.status.calledOnce).to.equal(true);
       expect(res.json.calledOnce).to.equal(true);
       expect(res.status.args[0][0]).to.equal(200);
@@ -284,7 +285,7 @@ describe('Estate controller tests:', () => {
 
       await controller.getOneEstate(req, res, next);
 
-      // assertions for empty response
+      // assertions
       expect(next.calledOnce).to.equal(true);
       expect(next.args[0][0].status).to.equal(404);
       expect(next.args[0][0].message).to.equal('Estate does not exist');
@@ -304,8 +305,170 @@ describe('Estate controller tests:', () => {
 
       await controller.getOneEstate(req, res, next);
 
-      // assertions for server error
+      // assertions
       expect(next.calledOnce).to.equal(true);
+    });
+  });
+
+  describe('POST /estates/:id/files', () => {
+    it('should upload file of an existing Estate', async () => {
+      const req = {
+        params: { id: '3' },
+        files: {
+          image: {
+            size: 1,
+            path: ''
+          }
+        },
+        fields: {
+          tag: "thumbnail"
+        }
+      };
+      const res = {
+        status: sinon.spy(),
+        json: sinon.spy()
+      };
+      const next = sinon.spy();
+      const fsSpy = sinon.spy(fs, 'unlink');
+      // create a stub to fake the database query service response
+      sinon.stub(services, 'uploadFile').returns(Promise.resolve({
+        rowCount: 1
+      }));
+
+      await controller.postFile(req, res, next);
+
+      // assertions
+      expect(res.status.calledOnce).to.equal(true);
+      expect(res.json.calledOnce).to.equal(true);
+      expect(res.status.args[0][0]).to.equal(200);
+      expect(res.json.args[0][0]).to.be.an('object').that.has.all.keys('status', 'message', 'data');
+      expect(fsSpy.calledOnce).to.equal(true);
+    });
+
+    it('should not upload file for a non-existent estate', async () => {
+      const req = {
+        params: { id: '388' },
+        files: {
+          image: {
+            size: 1,
+            path: ''
+          }
+        }
+        ,
+        fields: {
+          tag: "thumbnail"
+        }
+      };
+      const res = {
+        status: sinon.spy(),
+        json: sinon.spy()
+      };
+      const next = sinon.spy();
+      const fsSpy = sinon.spy(fs, 'unlink');
+
+      sinon.stub(services, 'uploadFile').returns(Promise.resolve({
+        rowCount: 0
+      }));
+
+      await controller.postFile(req, res, next);
+
+      // assertions
+      expect(next.calledOnce).to.equal(true);
+      expect(next.args[0][0].status).to.equal(400);
+      expect(next.args[0][0].message).to.equal('Estate does not exist');
+      expect(fsSpy.calledOnce).to.equal(true);
+    });
+
+    it('should not upload an empty image file', async () => {
+      const req = {
+        params: { id: '3' },
+        files: {
+          image: {
+            size: 0,
+            path: ''
+          }
+        },
+        fields: {
+          tag: "thumbnail"
+        }
+      };
+      const res = {
+        status: sinon.spy(),
+        json: sinon.spy()
+      };
+      const next = sinon.spy();
+      const fsSpy = sinon.spy(fs, 'unlink');
+
+      sinon.stub(services, 'uploadFile').returns(Promise.resolve());
+
+      await controller.postFile(req, res, next);
+
+      // assertions
+      expect(next.calledOnce).to.equal(true);
+      expect(next.args[0][0].status).to.equal(400);
+      expect(next.args[0][0].message).to.equal('You need to upload a file with an identifying tag');
+      expect(fsSpy.calledOnce).to.equal(true);
+    });
+
+    it('should not upload file without an identifying tag', async () => {
+      const req = {
+        params: { id: '3' },
+        files: {
+          image: {
+            size: 1,
+            path: ''
+          }
+        }
+        ,
+        fields: {
+          tag: ''
+        }
+      };
+      const res = {
+        status: sinon.spy(),
+        json: sinon.spy()
+      };
+      const next = sinon.spy();
+      const fsSpy = sinon.spy(fs, 'unlink');
+
+      sinon.stub(services, 'uploadFile').returns(Promise.resolve());
+
+      await controller.postFile(req, res, next);
+
+      // assertions
+      expect(next.calledOnce).to.equal(true);
+      expect(next.args[0][0].status).to.equal(400);
+      expect(next.args[0][0].message).to.equal('You need to upload a file with an identifying tag');
+      expect(fsSpy.calledOnce).to.equal(true);
+    });
+
+    it('should handle server error', async () => {
+      const req = {
+        params: { id: '3' },
+        files: {
+          image: {
+            size: 1,
+            path: ''
+          }
+        },
+        fields: {
+          tag: "thumbnail"
+        }
+      };
+      const res = {
+        status: sinon.spy(),
+        json: sinon.spy()
+      };
+      const next = sinon.spy();
+      const fsSpy = sinon.spy(fs, 'unlink');
+
+      sinon.stub(services, 'uploadFile').returns(Promise.reject());
+
+      await controller.postFile(req, res, next);
+
+      // assertions
+      expect(next.calledOnce).to.equal(true);
+      expect(fsSpy.calledOnce).to.equal(true);
     });
   });
 });

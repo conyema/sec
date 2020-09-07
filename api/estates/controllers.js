@@ -1,4 +1,5 @@
 const createError = require("http-errors");
+const fs = require('fs');
 const debug = require("debug")("app:estate");
 
 const services = require("./services");
@@ -109,10 +110,51 @@ const deleteEstate = async (req, res, next) => {
   }
 }
 
+const postFile = async (req, res, next) => {
+  const noImage = req.files.image === undefined || req.files.image.size === 0;
+  const noTag = req.fields.tag === undefined || req.fields.tag === '';
+
+  try {
+    // Reject if request does not contain a file or
+    if (noImage || noTag) {
+      return next(createError(400, 'You need to upload a file with an identifying tag'));
+    }
+
+    // get request data
+    const id = req.params.id;
+    const { path } = req.files.image;
+    const { tag } = req.fields;
+
+    const { rows, rowCount } = await services.uploadFile(id, path, tag);
+
+    if (rowCount === 0) {
+      return next(createError(400, 'Estate does not exist'));
+    }
+
+    res.status(200);
+    return res.json({
+      status: 'success',
+      message: 'File upload was successful',
+      data: rows
+    });
+  } catch (err) {
+    debug(err);
+    next(err);
+  } finally {
+    // delete temporary file (if available) whether upload is successful or not
+    const noFile = req.files.image === undefined
+    if (!noFile) {
+      const { path } = req.files.image;
+      fs.unlink(path, () => debug("temporary file deleted"));
+    }
+  }
+}
+
 module.exports = {
   deleteEstate,
   editEstate,
   getAllEstates,
   getOneEstate,
-  postEstate
+  postEstate,
+  postFile,
 };

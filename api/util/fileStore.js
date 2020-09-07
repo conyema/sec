@@ -1,8 +1,9 @@
 const cloudinary = require('cloudinary').v2;
 const dotenv = require('dotenv');
-const fs = require('fs');
+// const fs = require('fs');
 const debug = require('debug')('app:fileStore');
-const renameFile = require('../util/renameFile')
+// const renameFile = require('../util/renameFile');
+// const { json } = require('body-parser');
 
 dotenv.config();
 cloudinary.config({
@@ -18,21 +19,19 @@ cloudinary.config({
  * @returns {object} an object containing the file's upload data
  */
 
-const uploadOneFile = async (file, folderName = '') => {
+const uploadOneFile = async (path, tag, folderName = '') => {
   try {
-    const response = await cloudinary.uploader.upload(file.path, {
-      public_id: renameFile(file),
+    const { public_id, secure_url } = await cloudinary.uploader.upload(path, {
+      public_id: tag,
       folderName
     });
+    // convert response to JSON
+    const uploadData = JSON.stringify({ publicId: public_id, url: secure_url });
 
-    return response;
+    return uploadData;
   } catch (err) {
-    // throw
     debug(err);
     throw new Error("Unable to upload file at the moment");
-  } finally {
-    // delete temporary file whether upload is successful or not
-    fs.unlink(file.path, () => debug("temporary file deleted"));
   }
 }
 

@@ -1,16 +1,17 @@
 const formidable = require('formidable');
+const debug = require('debug')('app:parseForm');
 
 const parseForm = (req, res, next) => {
-  // Skip middleware if request does not contain form-data
+  // throw error if request does not contain form-data
   if (!req.is('multipart/form-data')) {
-    console.log('req: does not contain a form-data');
-    next();
+    debug('There is no form to parse!!!');
+    throw new Error('There is no form to parse!!!');
   }
 
   const form = formidable({
-    multiples: true,
     uploadDir: './api/uploads/',
     keepExtensions: true,
+    // multiples: true,
     // encoding: 'utf-8',
     // enabledPlugins: ['json'],
     // maxFileSize: 1024

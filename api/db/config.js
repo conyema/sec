@@ -42,22 +42,22 @@ const poolQuery = (text, params) => {
   return pool.query(text, params);
 };
 
-// const getAllEntity = (id, entity, limit='ALL') => {
+// const getAllEntity = (id, entity, column = '*', limit='ALL') => {
 //   return pool.query(
-//     `SELECT *
+//     `SELECT ${column}
 //     FROM ${entity}
 //     ORDER BY ${entity}Id
 //     LIMIT ${limit};`
 //   );
 // };
 
-// const getOneEntity = (id, entity, limit='ALL') => {
-//   return pool.query(
-//     `SELECT *
-//     FROM ${entity}
-//     WHERE ${entity}Id = ${id};`
-//   );
-// };
+const getOneEntity = (id, entity, column = '*') => {
+  return pool.query(
+    `SELECT ${column}
+    FROM ${entity}
+    WHERE ${entity}Id = ${id};`
+  );
+};
 
 // const deleteAllEntity = (id, entity, limit='ALL') => {
 //   return pool.query(
@@ -85,7 +85,7 @@ module.exports = {
   // deleteAllEntity,
   // deleteOneEntity,
   // getAllEntity,
-  // getOneEntity,
+  getOneEntity,
   poolQuery,
   pool
 }
