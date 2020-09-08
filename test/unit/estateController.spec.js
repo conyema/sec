@@ -471,4 +471,73 @@ describe('Estate controller tests:', () => {
       expect(fsSpy.calledOnce).to.equal(true);
     });
   });
+
+  describe('DELETE /estates/:id/files', () => {
+    it('should delete file of an existing estate ', async () => {
+      const req = {
+        params: { id: '3' },
+        query: 'imageKey'
+      };
+      const res = {
+        status: sinon.spy(),
+        json: sinon.spy()
+      };
+      const next = sinon.spy();
+
+      // create a stub to fake the database query service response
+      sinon.stub(services, 'deleteFile').returns(Promise.resolve({
+        rowCount: 1,
+      }));
+
+      await controller.deleteFile(req, res, next);
+
+      // assertions
+      expect(res.status.calledOnce).to.equal(true);
+      expect(res.json.calledOnce).to.equal(true);
+      expect(res.status.args[0][0]).to.equal(200);
+      expect(res.json.args[0][0]).to.be.an('object').that.has.all.keys('status', 'message');
+    });
+
+    it('should not delete file if the estate is non-existent', async () => {
+      const req = {
+        params: { id: '122' },
+        query: 'imageKey'
+      };
+      const res = {
+        status: sinon.spy(),
+        json: sinon.spy()
+      };
+      const next = sinon.spy();
+
+      sinon.stub(services, 'deleteFile').returns(Promise.resolve({
+        rowCount: 0,
+      }));
+
+      await controller.deleteFile(req, res, next);
+
+      // assertions
+      expect(next.calledOnce).to.equal(true);
+      expect(next.args[0][0].status).to.equal(404);
+      expect(next.args[0][0].message).to.equal('Cannot delete file for non-existent estate');
+    });
+
+    it('should handle server error', async () => {
+      const req = {
+        params: { id: '3' },
+        query: 'imageKey'
+      };
+      const res = {
+        status: sinon.spy(),
+        json: sinon.spy()
+      };
+      const next = sinon.spy();
+
+      sinon.stub(services, 'deleteFile').returns(Promise.reject());
+
+      await controller.deleteFile(req, res, next);
+
+      // assertions
+      expect(next.calledOnce).to.equal(true);
+    });
+  });
 });
