@@ -476,7 +476,7 @@ describe('Estate controller tests:', () => {
     it('should delete file of an existing estate ', async () => {
       const req = {
         params: { id: '3' },
-        query: 'imageKey'
+        query: { tag: 'imageKey' }
       };
       const res = {
         status: sinon.spy(),
@@ -495,13 +495,13 @@ describe('Estate controller tests:', () => {
       expect(res.status.calledOnce).to.equal(true);
       expect(res.json.calledOnce).to.equal(true);
       expect(res.status.args[0][0]).to.equal(200);
-      expect(res.json.args[0][0]).to.be.an('object').that.has.all.keys('status', 'message');
+      expect(res.json.args[0][0]).to.be.an('object').that.has.all.keys('status', 'message', 'data');
     });
 
     it('should not delete file if the estate is non-existent', async () => {
       const req = {
         params: { id: '122' },
-        query: 'imageKey'
+        query: { tag: 'imageKey' }
       };
       const res = {
         status: sinon.spy(),
@@ -518,13 +518,13 @@ describe('Estate controller tests:', () => {
       // assertions
       expect(next.calledOnce).to.equal(true);
       expect(next.args[0][0].status).to.equal(404);
-      expect(next.args[0][0].message).to.equal('Cannot delete file for non-existent estate');
+      expect(next.args[0][0].message).to.equal('image does not exist');
     });
 
     it('should handle server error', async () => {
       const req = {
         params: { id: '3' },
-        query: 'imageKey'
+        query: { tag: 'imageKey' }
       };
       const res = {
         status: sinon.spy(),
