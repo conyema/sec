@@ -31,10 +31,22 @@ const uploadOneFile = async (path, tag, folderName = '') => {
     return uploadData;
   } catch (err) {
     debug(err);
-    throw new Error("Unable to upload file at the moment");
+    throw new Error("Unable to upload file to cloud store");
+  }
+}
+
+const deleteOneFile = async (publicId) => {
+  try {
+    const result = await cloudinary.uploader.destroy(publicId);
+    // res: 'ok' or 'not found'
+    return result;
+  } catch (err) {
+    debug(err);
+    throw new Error("Unable to delete file in cloud store");
   }
 }
 
 module.exports = {
+  deleteOneFile,
   uploadOneFile
 };
