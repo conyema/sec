@@ -150,8 +150,32 @@ const postFile = async (req, res, next) => {
   }
 }
 
+const deleteFile = async (req, res, next) => {
+  const { id } = req.params;
+  const { tag } = req.query;
+
+  try {
+    const { rows, rowCount } = await services.deleteFile(id, tag);
+
+    if (rowCount === 0) {
+      return next(createError(404, 'image does not exist'));
+    }
+
+    res.status(200);
+    return res.json({
+      status: 'success',
+      message: 'image deleted successfully',
+      data: rows
+    });
+  } catch (err) {
+    debug(err);
+    next(err);
+  }
+}
+
 module.exports = {
   deleteEstate,
+  deleteFile,
   editEstate,
   getAllEstates,
   getOneEstate,

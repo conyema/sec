@@ -1,4 +1,4 @@
-const { uploadOneFile } = require('../util/fileStore');
+const { deleteOneFile, uploadOneFile } = require('../util/fileStore');
 const renameFile = require('../util/renameFile');
 const { poolQuery, getOneEntity } = require('../db/config');
 // const { json } = require('express');
@@ -91,9 +91,36 @@ const uploadFile = async (id, path, tag) => {
   }
 }
 
+const deleteFile = async (id, tag) => {
+  // check validity of id and tag before file deletion
+  const imageID = 'publicId';
+  const result = await getOneEntity(id, 'estate', `media -> '${tag}' -> '${imageID}' AS publicId`);
+  const noImage =  result.rowCount === 0 || result.rows[0].publicid === null;
+
+  if ( noImage ) {
+    result.rowCount = 0;
+    return result;
+  } else {
+    const { publicid } = result.rows[0];
+
+    // delete file in cloud store
+    await deleteOneFile(publicid);
+
+    // delete file data in database
+    return poolQuery(`
+      UPDATE estate
+      SET media = media - $2
+      WHERE estateid = $1
+      returning *;`,
+      [id, tag]
+    );
+  }
+}
+
 module.exports = {
   createEstate,
   deleteEstate,
+  deleteFile,
   selectAllEstates,
   selectOneEstate,
   updateEstate,
