@@ -22,7 +22,8 @@ const parseForm = (req, res, next) => {
       return next(err);
     }
     req.files = files;
-    req.fields = fields;
+    // req.fields = fields;
+    req.body = fields;
     return next();
   });
 };

@@ -69,7 +69,7 @@ describe('Estate controller tests:', () => {
 
   describe('POST /estates', () => {
     it('should create an Estate', async () => {
-      const req = { fields: {} };
+      const req = { body: {} };
       const res = {
         status: sinon.spy(),
         json: sinon.spy()
@@ -91,7 +91,7 @@ describe('Estate controller tests:', () => {
     });
 
     it('should handle server error', async () => {
-      const req = { fields: {} };
+      const req = { body: {} };
       const res = {
         status: sinon.spy(),
         json: sinon.spy()
@@ -111,7 +111,7 @@ describe('Estate controller tests:', () => {
     it('should update an Estate', async () => {
       const req = {
         params: { id: '3' },
-        fields: {},
+        body: {},
       };
       const res = {
         status: sinon.spy(),
@@ -136,7 +136,7 @@ describe('Estate controller tests:', () => {
     it('should not update a non-existent estate', async () => {
       const req = {
         params: { id: '122' },
-        fields: {},
+        body: {},
       };
       const res = {
         status: sinon.spy(),
@@ -159,7 +159,7 @@ describe('Estate controller tests:', () => {
     it('should handle server error', async () => {
       const req = {
         params: { id: '3' },
-        fields: {},
+        body: {},
       };
       const res = {
         status: sinon.spy(),
@@ -317,10 +317,10 @@ describe('Estate controller tests:', () => {
         files: {
           image: {
             size: 1,
-            path: ''
+            path: 'path to image'
           }
         },
-        fields: {
+        body: {
           tag: "thumbnail"
         }
       };
@@ -351,11 +351,11 @@ describe('Estate controller tests:', () => {
         files: {
           image: {
             size: 1,
-            path: ''
+            path: 'path to image'
           }
         }
         ,
-        fields: {
+        body: {
           tag: "thumbnail"
         }
       };
@@ -385,10 +385,10 @@ describe('Estate controller tests:', () => {
         files: {
           image: {
             size: 0,
-            path: ''
+            path: 'path to image'
           }
         },
-        fields: {
+        body: {
           tag: "thumbnail"
         }
       };
@@ -406,40 +406,8 @@ describe('Estate controller tests:', () => {
       // assertions
       expect(next.calledOnce).to.equal(true);
       expect(next.args[0][0].status).to.equal(400);
-      expect(next.args[0][0].message).to.equal('You need to upload a file with an identifying tag');
-      expect(fsSpy.calledOnce).to.equal(true);
-    });
-
-    it('should not upload file without an identifying tag', async () => {
-      const req = {
-        params: { id: '3' },
-        files: {
-          image: {
-            size: 1,
-            path: ''
-          }
-        }
-        ,
-        fields: {
-          tag: ''
-        }
-      };
-      const res = {
-        status: sinon.spy(),
-        json: sinon.spy()
-      };
-      const next = sinon.spy();
-      const fsSpy = sinon.spy(fs, 'unlink');
-
-      sinon.stub(services, 'uploadFile').returns(Promise.resolve());
-
-      await controller.postFile(req, res, next);
-
-      // assertions
-      expect(next.calledOnce).to.equal(true);
-      expect(next.args[0][0].status).to.equal(400);
-      expect(next.args[0][0].message).to.equal('You need to upload a file with an identifying tag');
-      expect(fsSpy.calledOnce).to.equal(true);
+      expect(next.args[0][0].message).to.equal('There is no image to upload');
+      // expect(fsSpy.calledOnce).to.equal(true);
     });
 
     it('should handle server error', async () => {
@@ -448,10 +416,10 @@ describe('Estate controller tests:', () => {
         files: {
           image: {
             size: 1,
-            path: ''
+            path: 'path to image'
           }
         },
-        fields: {
+        body: {
           tag: "thumbnail"
         }
       };
