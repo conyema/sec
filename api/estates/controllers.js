@@ -111,7 +111,6 @@ const deleteEstate = async (req, res, next) => {
 
 const postFile = async (req, res, next) => {
   const noImage = req.files.image === undefined || req.files.image.size === 0;
-  // const noTag = req.body.tag === undefined || req.body.tag === '';
 
   // Reject if request does not contain a file(image)
   if (noImage) {
