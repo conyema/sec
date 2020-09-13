@@ -8,14 +8,15 @@ const { poolQuery, getOneEntity } = require('../db/config');
  */
 
 const selectAllEstates = async () => {
+
   return  poolQuery(`
-  SELECT estateId, name, description, city, type, status, media -> 'poster' AS poster
-  FROM estate
-  INNER JOIN location USING(locationId)
-  INNER JOIN estateType USING(estateTypeId)
-  INNER JOIN estateStatus USING(estatestatusId)
-  ORDER BY estateId
-  LIMIT 20;
+    SELECT estateId, name, description, city, type, status, media -> 'poster' AS poster
+    FROM estate
+    INNER JOIN location USING(locationId)
+    INNER JOIN estateType USING(estateTypeId)
+    INNER JOIN estateStatus USING(estatestatusId)
+    ORDER BY estateId
+    LIMIT 20;
   `);
 }
 
@@ -94,6 +95,7 @@ const uploadFile = async (id, path, tag) => {
 const deleteFile = async (id, tag) => {
   // check validity of id and tag before file deletion
   const imageID = 'publicId';
+
   const result = await getOneEntity(id, 'estate', `media -> '${tag}' -> '${imageID}' AS publicId`);
   const noImage =  result.rowCount === 0 || result.rows[0].publicid === null;
 

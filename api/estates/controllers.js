@@ -1,6 +1,7 @@
-const createError = require("http-errors");
 const fs = require('fs');
+const createError = require("http-errors");
 const debug = require("debug")("app:estate");
+// const { check, validationResult } = require('express-validator');
 
 const services = require("./services");
 // const files
@@ -26,7 +27,7 @@ const getAllEstates = async (req, res, next) => {
 }
 
 const getOneEstate = async (req, res, next) => {
-  const id = req.params.id;
+  const  { id } = req.params;
 
   try {
     const { rows, rowCount } = await services.selectOneEstate(id);
@@ -47,10 +48,9 @@ const getOneEstate = async (req, res, next) => {
 }
 
 const postEstate = async (req, res, next) => {
-  const data = req.fields;
+  const data = req.body;
 
   try {
-    // const { rows } = await services.createEstate();
     const { rows } = await services.createEstate(data);
 
     res.status(201);
@@ -65,9 +65,8 @@ const postEstate = async (req, res, next) => {
 }
 
 const editEstate = async (req, res, next) => {
-  const data = req.fields;
-  // const id = parseInt(req.params.id, 10);
-  const id = req.params.id;
+  const { id } = req.params;
+  const data = req.body;
 
   try {
     const { rows, rowCount } = await services.updateEstate(id, data);
@@ -90,7 +89,7 @@ const editEstate = async (req, res, next) => {
 
 const deleteEstate = async (req, res, next) => {
   // const id = parseInt(req.params.id, 10);
-  const id = req.params.id;
+  const { id } = req.params;
 
   try {
     const { rowCount } = await services.deleteEstate(id);
@@ -112,19 +111,19 @@ const deleteEstate = async (req, res, next) => {
 
 const postFile = async (req, res, next) => {
   const noImage = req.files.image === undefined || req.files.image.size === 0;
-  const noTag = req.fields.tag === undefined || req.fields.tag === '';
+  // const noTag = req.body.tag === undefined || req.body.tag === '';
+
+  // Reject if request does not contain a file(image)
+  if (noImage) {
+    return next(createError(400, 'There is no image to upload'));
+  }
+
+  // get request data
+  const { id } = req.params;
+  const { path } = req.files.image;
+  const { tag } = req.body;
 
   try {
-    // Reject if request does not contain a file or
-    if (noImage || noTag) {
-      return next(createError(400, 'You need to upload a file with an identifying tag'));
-    }
-
-    // get request data
-    const id = req.params.id;
-    const { path } = req.files.image;
-    const { tag } = req.fields;
-
     const { rows, rowCount } = await services.uploadFile(id, path, tag);
 
     if (rowCount === 0) {
@@ -142,8 +141,8 @@ const postFile = async (req, res, next) => {
     next(err);
   } finally {
     // delete temporary file (if available) whether upload is successful or not
-    const noFile = req.files.image === undefined
-    if (!noFile) {
+    const fileExists = !(req.files.image === undefined);
+    if (fileExists) {
       const { path } = req.files.image;
       fs.unlink(path, () => debug("temporary file deleted"));
     }
