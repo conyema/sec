@@ -69,7 +69,7 @@ describe('Estate controller tests:', () => {
 
   describe('POST /estates', () => {
     it('should create an Estate', async () => {
-      const req = { fields: {} };
+      const req = { body: {} };
       const res = {
         status: sinon.spy(),
         json: sinon.spy()
@@ -91,7 +91,7 @@ describe('Estate controller tests:', () => {
     });
 
     it('should handle server error', async () => {
-      const req = { fields: {} };
+      const req = { body: {} };
       const res = {
         status: sinon.spy(),
         json: sinon.spy()
@@ -111,7 +111,7 @@ describe('Estate controller tests:', () => {
     it('should update an Estate', async () => {
       const req = {
         params: { id: '3' },
-        fields: {},
+        body: {},
       };
       const res = {
         status: sinon.spy(),
@@ -136,7 +136,7 @@ describe('Estate controller tests:', () => {
     it('should not update a non-existent estate', async () => {
       const req = {
         params: { id: '122' },
-        fields: {},
+        body: {},
       };
       const res = {
         status: sinon.spy(),
@@ -159,7 +159,7 @@ describe('Estate controller tests:', () => {
     it('should handle server error', async () => {
       const req = {
         params: { id: '3' },
-        fields: {},
+        body: {},
       };
       const res = {
         status: sinon.spy(),
@@ -320,7 +320,7 @@ describe('Estate controller tests:', () => {
             path: ''
           }
         },
-        fields: {
+        body: {
           tag: "thumbnail"
         }
       };
@@ -355,7 +355,7 @@ describe('Estate controller tests:', () => {
           }
         }
         ,
-        fields: {
+        body: {
           tag: "thumbnail"
         }
       };
@@ -388,7 +388,7 @@ describe('Estate controller tests:', () => {
             path: ''
           }
         },
-        fields: {
+        body: {
           tag: "thumbnail"
         }
       };
@@ -420,7 +420,7 @@ describe('Estate controller tests:', () => {
           }
         }
         ,
-        fields: {
+        body: {
           tag: ''
         }
       };
@@ -451,7 +451,7 @@ describe('Estate controller tests:', () => {
             path: ''
           }
         },
-        fields: {
+        body: {
           tag: "thumbnail"
         }
       };
