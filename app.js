@@ -4,25 +4,26 @@ const dotenv = require('dotenv');
 const debug = require('debug')('app:server');
 // const fileUpload = require("express-fileupload");
 const logger = require("morgan");
-var path = require('path');
+// const path = require('path');
+const helmet = require("helmet");
 
-// const estates = require("./estate/routes");
-// const parseForm = require("./util/parseForm");
-const indexRoutes = require("./api/routes/index");
-const featureRoutes = require("./api/routes/features");
-const errorHandler = require("./api/util/errorHandler");
 
-const app = express();
+const errorHandler = require("./util/errorHandler");
+
+const api = require("./api");
+const dashboard = require("./dashboard");
+// const web = require("./web");
+
+
+// environment configuration
 dotenv.config();
+const app = express();
 const port = process.env.PORT || 4000;
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
-
+// middlewares for production env.
+app.use(helmet());
 app.use(cors());
-// Log requests to the console (for debugging)
-app.use(logger('dev'));
+app.use(logger('combined'));
 app.use(express.json());
 app.use(
   express.urlencoded({
@@ -30,28 +31,25 @@ app.use(
   })
 );
 
-app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use(parseForm);
-// app.use(fileUpload({
-//   useTempFiles: true,
-//   safeFileNames: true,
-// }));
+// sub-apps and routes
+app.use('/v1', api);
+app.use('/manage', dashboard);
+// app.use('/api/v1', api);
+// app.use('/manage', dashboard);
+// app.use('/', web);
+// app.use('/api/v1', api);
 
-// Routes
-app.use('/', indexRoutes);
-app.use('/api/v1/', featureRoutes);
-// app.use('/api/v1/estates', estates);
-
-app.get('*', (req, res) => {
-  res.json({ message: 'Welcome to the SEC Homepage!!!' });
-});
+// app.get('*', (req, res) => {
+//   res.json({ message: 'Welcome to the SEC!!!' });
+// });
 
 // default error handler
 app.use(errorHandler);
 
+// start app server
 app.listen(port, () => {
-  debug(`App running on port ${port}.`);
+  debug(`Api running on port ${port}.`);
 });
 
 module.exports = app;

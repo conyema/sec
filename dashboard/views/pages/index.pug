@@ -1,0 +1,19 @@
+extends ../layout
+
+block content
+  div
+    <!-- Dashboard -->
+    section(id="dashboard" class="section")
+      .container-fluid
+        h2.title Dashboard
+        div(class="row row-cols-1 row-cols-sm-2")
+          div(class="col mb-4")
+            include ../includes/displaycard.pug
+          div(class="col mb-4")
+            include ../includes/displaycard.pug
+
+    <!-- featured projects -->
+    section(id="projects" class="section")
+      .container-fluid
+        h2.title Featured Projects
+        button(class="btn btn-main") See All

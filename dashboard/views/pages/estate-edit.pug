@@ -1,0 +1,117 @@
+extends ../layout
+
+block content
+  // Hero
+  section(id="hero" class="hero")
+    .container-fluid.container-lg
+      //- h1.title.text-center   Estates
+      h1(class="title text-center") Update Estate
+
+  // Estate Edit
+  section.section
+    .container-fluid
+
+      // Back button
+      a(href="/manage/estates" class="btn btn-main" title="Back to Estates")
+        <svg width="2em" height="2em" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+          <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+          <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+        </svg>
+        span(class="align-middle")  Back
+
+      // Estate Form
+      //- form(id="estate-form" class="box-container gform")
+      form(
+        id="estate-form"
+        class="form mt-5"
+        data-method="PUT"
+        data-uri=`/api/v1/estates/${_id}`
+      )
+        .card.container.py-3
+          p.small.text-muted.fst-italic  * = Required
+
+          .row.row-cols-1.row-cols-md-2.my-4
+            .col
+              div(class="input-group mb-4")
+                label(class="input-group-text" for="title")  Title *
+                input(type="text" class="form-control" id="title" name="title" value=title required)
+
+              div(class="input-group mb-4")
+                label(class="input-group-text" for="location")  Location *
+                input(type="text" class="form-control" id="location" name="location" value=location required)
+
+              div(class="input-group mb-4")
+                label(class="input-group-text" for="type")  Type *
+                input(type="text" class="form-control" id="type" name="type" value=`${type || ""}` required)
+
+              div(class="input-group mb-4")
+                label(class="input-group-text" for="status")  Status *
+                input(type="text" class="form-control" id="status" name="status" value=status required)
+
+              div(class="input-group mb-4")
+                label(class="input-group-text" for="video")  Video Link
+                input(type="url" class="form-control" id="video" name="video" value=video)
+
+              //- div(class="form-check form-switch mb-4")
+                if featured
+                  input(class="form-check-input" type="checkbox" role="switch" id="featured" name="featured" value="true" checked)
+                  input(name="featured" type="hidden" value="false")
+                  label(class="form-check-label" for="featured") featured
+                else
+                  input(class="form-check-input" type="checkbox" role="switch" id="featured" name="featured" value="true")
+                  input(name="featured" type="hidden" value="false")
+                  label(class="form-check-label" for="featured") featured
+
+              div(class="d-flex mb-4")
+                legend(class="col-form-label pt-0") Feature on home page?
+                .col-sm-4.px-2
+                  if featured
+                    div(class="form-check form-switch")
+                      input(class="form-check-input" type="radio" name="featured" id="feat-yes" value="true" checked)
+                      label(class="form-check-label" for="feat-yes") Yes
+                    div(class="form-check form-switch")
+                      input(class="form-check-input" type="radio" name="featured" id="feat-no" value="false")
+                      label(class="form-check-label" for="feat-no") No
+                  else
+                    div(class="form-check form-switch")
+                      input(class="form-check-input" type="radio" name="featured" id="feat-yes" value="true")
+                      label(class="form-check-label" for="feat-yes") Yes
+                    div(class="form-check form-switch")
+                      input(class="form-check-input" type="radio" name="featured" id="feat-no" value="false" checked)
+                      label(class="form-check-label" for="feat-no") No
+
+            .col
+              //- div(class="input-group mb-4")
+                label(class="input-group-text" for="features")  Features
+                input(type="text" class="form-control" id="features" name="features" required value=title)
+
+              div.mb-3
+                label(class="form-label" for="message")   Description
+                textarea(class="form-control form-message" name="description" id="description") #{description}
+
+              div.mb-3
+                label(class="form-label" for="message")   Features
+                textarea(class="form-control form-message" name="features" id="features") #{features}
+                small.text-muted.fst-italic   Delimit features with a comma(,)
+
+              //- div(class="form-floating mb-4")
+                label(class="small muted pt-0" for="message")   Message *
+                textarea(class="form-control form-message" name="message" id="message" required)
+
+              //- div(class="form-floating")
+                textarea(class="form-control form-message" name="message" placeholder="message or question" id="message" required)
+                label(class="small muted pt-0" for="message")   Message*
+
+
+          div(class="input-group mb-4")
+            button(class="btn btn-main" type="submit") Send
+            button(class="btn btn-main" type="reset") Reset
+
+          //- div(class="input-group mb-4")
+            button(class="btn btn-main" type="submit") Send
+
+        //- div(class="")
+          p(id="msg-status" class="alert small p-2 fade-in m-0 d-none" role="alert" aria-live="assertive")
+        //- p(id="msg-status" class="alert small m-0" role="alert" aria-live="assertive")
+        //- .alert(class="alert-danger", role="alert", id="error-group", style="display: none")
+          ul(id="errors")

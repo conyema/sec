@@ -1,0 +1,89 @@
+<svg width="25.771mm" height="19.704mm" version="1.1" viewBox="0 0 25.771 19.704" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <meshgradient id="meshgradient14362" x="-67.92099" y="181.16383" gradientTransform="matrix(.0625 0 0 .0625 -16.846 193.02)" gradientUnits="userSpaceOnUse" type="bicubic">
+   <meshrow>
+    <meshpatch>
+     <stop stop-color="#fff" path="c 32.8687,0  65.7374,0  98.6061,0"/>
+     <stop stop-opacity="0" path="c 0.548128,9.89372  0,8.82488  0,13.2372"/>
+     <stop stop-color="#fff" path="c -3.26976,5.68434e-14  -20.2427,-1.64439  -98.6061,0"/>
+     <stop stop-opacity="0" path="c 0,-4.41244  0,-8.82488  0,-13.2372"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 32.8687,0  65.7374,0  98.6061,0"/>
+     <stop stop-color="#fff" path="c 0,4.41244  0,8.82488  0,13.2372"/>
+     <stop stop-opacity="0" path="c -70.1414,-0.548128  -81.085,0.548128  -98.6061,0"/>
+    </meshpatch>
+   </meshrow>
+   <meshrow>
+    <meshpatch>
+     <stop path="c 0,4.41244  0.548128,2.79547  0,13.2372"/>
+     <stop stop-opacity="0" path="c -32.8687,0  -65.7374,0  -98.6061,0"/>
+     <stop stop-color="#fff" path="c 0,-4.41244  0,-8.82488  0,-13.2372"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,4.41244  0,8.82488  0,13.2372"/>
+     <stop stop-color="#fff" path="c -32.8687,0  -65.7374,0  -98.6061,0"/>
+    </meshpatch>
+   </meshrow>
+  </meshgradient>
+  <meshgradient id="meshgradient14436" x="-96.31488" y="118.50151" gradientTransform="matrix(.0625 0 0 .0625 -16.846 193.02)" gradientUnits="userSpaceOnUse" type="bicubic">
+   <meshrow>
+    <meshpatch>
+     <stop stop-color="#fff" path="c 42.3333,0  84.6667,0  127,0"/>
+     <stop stop-opacity="0" path="c 0,10.4419  0,8.82488  0,13.2372"/>
+     <stop stop-color="#fff" path="c -42.3333,-1.7053e-13  -2.99556,-0.548132  -127,0"/>
+     <stop stop-opacity="0" path="c 0,-4.41244  0,-8.82488  0,-13.2372"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 42.3333,0  84.6667,0  127,0"/>
+     <stop stop-color="#fff" path="c 0,4.41244  0,8.82488  0,13.2372"/>
+     <stop stop-opacity="0" path="c -112.494,0.548128  -103.851,2.84217e-14  -127,0"/>
+    </meshpatch>
+   </meshrow>
+   <meshrow>
+    <meshpatch>
+     <stop path="c 0,4.41244  -0.548128,4.98798  0,13.2372"/>
+     <stop stop-opacity="0" path="c -42.3333,0  -84.6667,0  -127,0"/>
+     <stop stop-color="#fff" path="c 0,-4.41244  0,-8.82488  0,-13.2372"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,4.41244  0,8.82488  0,13.2372"/>
+     <stop stop-color="#fff" path="c -42.3333,0  -84.6667,0  -127,0"/>
+    </meshpatch>
+   </meshrow>
+  </meshgradient>
+  <meshgradient id="meshgradient14510" x="-67.92099" y="55.839214" gradientTransform="matrix(.0625 0 0 .0625 -16.846 193.02)" gradientUnits="userSpaceOnUse" type="bicubic">
+   <meshrow>
+    <meshpatch>
+     <stop stop-color="#fff" path="c 32.8687,0  65.7374,0  98.6061,0"/>
+     <stop stop-opacity="0" path="c 1.64439,12.0862  0,8.82488  0,13.2372"/>
+     <stop stop-color="#fff" path="c 6.04842,-2.19251  -35.0422,2.84217e-14  -98.6061,0"/>
+     <stop stop-opacity="0" path="c 0,-4.41244  0,-8.82488  0,-13.2372"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 32.8687,0  65.7374,0  98.6061,0"/>
+     <stop stop-color="#fff" path="c 0,4.41244  0,8.82488  0,13.2372"/>
+     <stop stop-opacity="0" path="c -91.5185,-2.74064  -88.7588,-1.09626  -98.6061,0"/>
+    </meshpatch>
+   </meshrow>
+   <meshrow>
+    <meshpatch>
+     <stop path="c 0,4.41244  0,3.89172  0,13.2372"/>
+     <stop stop-opacity="0" path="c -32.8687,0  -65.7374,0  -98.6061,0"/>
+     <stop stop-color="#fff" path="c 0,-4.41244  0,-8.82488  0,-13.2372"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,4.41244  0,8.82488  0,13.2372"/>
+     <stop stop-color="#fff" path="c -32.8687,0  -65.7374,0  -98.6061,0"/>
+    </meshpatch>
+   </meshrow>
+  </meshgradient>
+ </defs>
+ <g transform="translate(-101.33 -140.03)">
+  <g transform="matrix(1.6234 0 0 2.0768 138.45 -268.08)" fill="none" stroke-linecap="round" stroke-width="1.6545">
+   <path d="m-20.252 197.33h10.648" stroke="url(#meshgradient14510)" style="paint-order:stroke markers fill"/>
+   <path d="m-22.027 201.25h14.197" stroke="url(#meshgradient14436)" style="paint-order:stroke markers fill"/>
+   <path d="m-20.252 205.17h10.648" stroke="url(#meshgradient14362)" style="paint-order:stroke markers fill"/>
+  </g>
+ </g>
+</svg>
