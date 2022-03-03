@@ -7,7 +7,7 @@ module.exports = async (req, res, next) => {
   const hasFile = Object.keys(files).length !== 0 && files.constructor === Object;
 
 
-  // Request contains file(s)
+  // Request contains file(s): handle error in the controller to clean up temp(upload) folder
   if (hasFile) {
     req.errors = errors.array();
 

@@ -67,11 +67,60 @@ const estate = [
   //   .isBoolean()
 ];
 
+// const user = [
+//   check('email', 'user email is required')
+//     .not().isEmpty()
+//     .trim()
+//     .isString(),
+
+//   check('firstName')
+//     .optional()
+//     .trim()
+//     .isString(),
+
+//   check('lastName')
+//     .optional()
+//     .trim()
+//     .isString(),
+
+//   check('avatar', 'enter a link to an avatar or profile photo')
+//     .optional()
+//     // .isLength({ min: 3 })
+//     .isURL(),
+
+//   check('password')
+//     .optional()
+//     // .trim()
+//     .isString(),
+
+//   // check('source', 'source of info is required')
+//   //   .not().isEmpty()
+//   //   .trim()
+//   //   .isString(),
+
+//   // check('lastVisited', 'last visited should be a date')
+//   //   .optional()
+//   //   .isDate(),
+
+
+//   // check('floorSpace', '')
+//   //   .optional()
+//   //   .isNumeric(),
+
+//   // check('balcony', 'Number of balconies should be an integer')
+//   //   .optional()
+//   //   .isInt(),
+
+//   // check('petsAllowed', 'Pets allowed should be true or false')
+//   //   .optional()
+//   //   .isBoolean()
+// ];
+
 const user = [
-  check('email', 'user email is required')
+  check('email', 'A valid email is required')
     .not().isEmpty()
     .trim()
-    .isString(),
+    .isEmail(),
 
   check('firstName')
     .optional()
@@ -83,37 +132,13 @@ const user = [
     .trim()
     .isString(),
 
-  check('profilePhoto', 'enter a link to the profile photo')
+  check('avatar', 'Enter a link to an avatar or profile photo')
     .optional()
-    // .isLength({ min: 3 })
     .isURL(),
 
   check('password')
     .optional()
-    // .trim()
     .isString(),
-
-  check('source', 'source of info is required')
-    .not().isEmpty()
-    .trim()
-    .isString(),
-
-  check('lastVisited', 'last visited should be a date')
-    .optional()
-    .isDate(),
-
-
-  // check('floorSpace', '')
-  //   .optional()
-  //   .isNumeric(),
-
-  // check('balcony', 'Number of balconies should be an integer')
-  //   .optional()
-  //   .isInt(),
-
-  // check('petsAllowed', 'Pets allowed should be true or false')
-  //   .optional()
-  //   .isBoolean()
 ];
 
 const file = [
@@ -121,9 +146,9 @@ const file = [
   //   .not().isEmpty()
   //   .toInt(),
 
-  check('id')
-    .not().isEmpty()
-    .isMongoId(),
+  // check('id')
+  //   .not().isEmpty()
+  //   .isMongoId(),
 
   check('title', 'A title is required for file identification')
     .not().isEmpty()
@@ -141,11 +166,12 @@ const id = [
     .isMongoId(),
 ];
 
-const estateEdit = [...id, ...estate];
+// const estateEdit = [...id, ...estate];
 
 module.exports = {
   id,
   file,
   estate,
-  estateEdit,
+  // estateEdit,
+  user
 };
