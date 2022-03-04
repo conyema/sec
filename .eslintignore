@@ -1,7 +1,10 @@
 !**/.eslintrc*
 node_modules*
 archive/
+prisma/
+web/
 dist
+*.min.js
 *.svg
 *.ico
 *.json

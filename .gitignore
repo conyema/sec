@@ -4,6 +4,10 @@ npm-debug.log
 
 # Local development
 archive/
+web/
+dashboard/index-dev.js
+demoData.js
+app-dev.js
 *.env
 *.dev
 .DS_Store
