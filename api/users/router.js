@@ -9,12 +9,13 @@ const {
   getAllUsers,
   getOneUser,
   editUser,
+  deleteUser,
 } = require('./controller');
 
 
 /** User management routes **/
 
-// Create an user
+// Create a user
 router.post('/', [parseForm, validations.user, validate, postUser]);
 
 // Fetch all Users
@@ -25,6 +26,9 @@ router.get('/:id', getOneUser);
 
 // Update a User
 router.put('/:id', [parseForm, validations.user, validate, editUser]);
+
+// Remove a User
+router.delete('/:id', deleteUser);
 
 
 module.exports = router;
