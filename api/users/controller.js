@@ -64,9 +64,31 @@ const getOneUser = async (req, res, next) => {
   }
 }
 
+const editUser = async (req, res, next) => {
+  const { id } = req.params;
+  const dataInput = req.body;
+
+  debug(id, dataInput);
+
+  try {
+    const result = await service.updateUser(id, dataInput);
+
+    res.status(200);
+    return res.json({
+      status: 'success',
+      message: 'User updated',
+      data: result,
+      // data: { id, ...dataInput }
+    });
+  } catch (err) {
+    debug(err);
+    next(err);
+  }
+}
 
 module.exports = {
   postUser,
   getAllUsers,
   getOneUser,
+  editUser,
 };
