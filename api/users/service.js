@@ -13,7 +13,15 @@ const createUser = async (data) => {
   })
 }
 
+const selectAllUsers = async (filter = {}, limit = 0) => {
+
+  return prisma.user.findMany({})
+}
+
+
+
 
 module.exports = {
   createUser,
+  selectAllUsers,
 }

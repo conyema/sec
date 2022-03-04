@@ -23,7 +23,28 @@ const postUser = async (req, res, next) => {
   }
 }
 
+const getAllUsers = async (req, res, next) => {
+  // const { page, ...filter } = req.query;
+  const filter = req.query;
+  // debug( filter);
+
+  try {
+    const result = await service.selectAllUsers(filter);
+
+    res.status(200);
+    return res.json({
+      status: 'success',
+      message: 'Users fetched',
+      data: result
+    });
+  } catch (err) {
+    debug(err);
+    next(err);
+  }
+}
+
 
 module.exports = {
   postUser,
+  getAllUsers,
 };
