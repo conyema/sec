@@ -44,7 +44,29 @@ const getAllUsers = async (req, res, next) => {
 }
 
 
+const getOneUser = async (req, res, next) => {
+  // use or return already verified User data
+  // const { user } = req;
+  const { id } = req.params;
+
+  try {
+    const result = await service.selectOneUser(id);
+
+    res.status(200);
+    return res.json({
+      status: 'success',
+      message: 'User fetched',
+      data: result
+    });
+  } catch (err) {
+    debug(err);
+    next(err);
+  }
+}
+
+
 module.exports = {
   postUser,
   getAllUsers,
+  getOneUser,
 };
