@@ -1,0 +1,70 @@
+extends ../layout
+include ../mixins/_estateCard
+
+block content
+  // Hero
+  section(id="hero" class="hero")
+    .container-fluid.container-lg
+      //- h1.title   Post Images
+      h1.title.text-center   Upload Image
+
+  // Image Upload
+  section.section
+    .container.img-container
+      a(href=`/manage/estates/${_id}` class="btn btn-main" title="Back to Estates")
+        <svg width="2em" height="2em" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+          <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+          <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+        </svg>
+        span(class="align-middle")  Back
+
+      //- .text-center.mt-5
+      // Image Form
+      form(
+        id="img-form"
+        class="form text-center mt-5"
+        data-method="POST"
+        data-uri=`/api/v1/estates/${_id}/images`
+      )
+        .card.py-2
+          .form-container.m-auto
+            p.small.mb-4.text-muted.fst-italic  * = Required
+
+            // image preview
+            figure.img-preview.bg-secondary
+              //- img(id="img-preview" class="img-thumbnail rounded-top" width="300" height="300")
+              img(id="img-preview" class="img-thumbnail rounded-top")
+              //- figcaption.vertical-text.d-inline-block      Image Preview
+              figcaption.vertical-text      Image Preview
+
+            .p-3
+              div.mb-5.mt-3
+                label(for="image" class="btn btn-white col-form-label menu-img-label")   Select Image *
+                //- input(id="input-img" type="file" accept="image/*" class="form-control d-none" id="image" name="image" onchange="viewImage(event)")
+                input(id="image" type="file" accept="image/*" class="form-control visually-hidden" name="image" required)
+
+                //- div(class="form-group row")
+                  label(for="unitPrice" class="col-sm-4 col-form-label")    Title
+                  div(class="col-sm-8")
+                    input(type="text" class="form-control" id="title" name="title")
+
+              .input-group.mb-4
+                label(class="input-group-text" for="title")    Title *
+                input(type="text" class="form-control" id="title" name="title" list="titleList" placeholder="Image title" required)
+                datalist(id="titleList")
+                  option(value="Poster")
+                  option(value="Ground Plan")
+                  option(value="Floor Plan")
+                  option(value="Living Room")
+                  option(value="Kitchen")
+
+
+              div.mt-4
+                //- button(class="btn btn-main mt-2" type="reset") Reset
+                button(class="btn btn-main mt-2 ms-2" type="submit") Save
+
+        //- div(class="")
+          p(id="msg-status" class="alert small p-2 fade-in m-0 d-none" role="alert" aria-live="assertive")
+        //- p(id="msg-status" class="alert small m-0" role="alert" aria-live="assertive")
+        //- .alert(class="alert-danger p-0 d-none" role="alert" id="error-group")
+          //- ul(id="errors")

@@ -1,0 +1,57 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
+    meta(name="description" content="A restaurant review app.")
+    //- link(rel="stylesheet", href="/manage/stylesheets/bootstrap.min.css")
+    //- link(rel='stylesheet', href='/manage/stylesheets/style.css')
+    link(rel="stylesheet", href="/manage/stylesheets/bootstrap.css")
+    link(rel='stylesheet', href='/manage/stylesheets/index.css')
+    link(rel='stylesheet', href='/manage/stylesheets/animate.css')
+    title Stella Eban Consulting
+
+  //- body
+  //- body(class="grid-md-bg" data-bs-spy="scroll" data-bs-target="#dashboard" data-bs-offset="0")
+  body(class="font-monospace" )
+
+
+    // Skip to main
+    a(class="visually-hidden-focusable" href="#main-content") Skip to main content
+
+    // Dashboard
+    .container-fluid
+      // Mobile Menu
+      nav(class="nav fixed-bottom d-md-none")
+        include ./includes/mobile-menu.pug
+
+      //- div(class="row row row-cols-1 row-cols-sm-2 gy-5 content-wrapper")
+      div(class="row row-cols-1 row-cols-md-2")
+
+        // Side Navigation (Menu)
+        //- nav(id="dashboard" class="col-md-3 col-xl-2 dashboard collapse d-md-flex m-0")
+        nav(id="side-nav" class="col-md-2 col-xl-2 dashboard d-none d-md-flex m-0")
+          include ./includes/admin-side-nav.pug
+
+
+        // Main Content
+        main(id="main-content" class="col-md-10 col-xl-10 site-main p-0 position-relative ms-auto" role="main")
+          //- div(class="content-wrapper")
+          block content
+
+    //- div(id="msg-box" class="alert small p-2 fade-in m-0 d-none" role="alert" aria-live="assertive")
+    div(id="msg-box" class="alert d-none bg-warning position-fixed top-0" role="alert" aria-live="assertive")
+
+
+    .loading-wrapper.d-none
+      <div class="lds-hourglass"></div>
+      <div class="lds-circle"><div></div></div>
+      <div class="lds-ripple"><div></div><div></div></div>
+      <div class="lds-ellipsis"><div></div><div></div><div></div>
+
+
+  // Scripts
+
+  // build:js manage/scripts/index.min.js defer
+  script(src="/manage/scripts/index.js" defer)
+  // endbuild

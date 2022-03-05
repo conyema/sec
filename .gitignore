@@ -4,6 +4,10 @@ npm-debug.log
 
 # Local development
 archive/
+web/
+dashboard/index-dev.js
+demoData.js
+app-dev.js
 *.env
 *.dev
 .DS_Store
@@ -12,4 +16,4 @@ coverage
 bash.exe.stackdump
 .nyc_output
 api/database
-api/uploads
+uploads

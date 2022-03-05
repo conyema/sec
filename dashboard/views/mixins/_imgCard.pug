@@ -1,0 +1,67 @@
+mixin imgCard(image, estateId)
+  //- div(class="col image-item" data-id=image.estateId)
+  div(id=image.imgId class="col img-item")
+    //- div(class="card h-100")
+    div(class="card h-100")
+      //- if image.poster
+        img(src= image.poster.url class="card-img-top" alt="")
+      //- div(class="card-body")
+        h5(class="card-title title")= image.title
+        //- p(class="card-text")= image.description
+        //- p
+          span(class="my-0")  Email:
+          a(class="footer-link" href=`mailto:${email}`) #{email}
+
+        p(class="card-text")= image.type
+        //- if image.poster
+          p(class="card-text")= `${image.poster.tag}:  ${image.poster.url}`
+
+        if image.poster
+          p.card-text
+            span(class="me-2")  #{image.poster.tag}:
+            //- a(class="footer-link" href=`${image.poster.url}`) #{image.poster.imgId}
+            a(class="footer-link" href=`${image.poster.url}`) Available
+
+      div(class="card-body text-center")
+        .d-flex
+          img(
+            class="img-fluid img-thumbnail m-auto"
+            src=image.url
+            alt=image.tag
+            width="450"
+            height="300"
+            loading="lazy"
+          )
+        .card-text
+          p.text-capitalize   #{image.title.replace("-", " ")}
+
+        //- ul(class="list-group list-group-flush")
+          each value, key in image
+
+              li.list-group-item
+                if key=="imgId"
+                  div.text-capitalize    #{key}
+                  div.text-secondary
+                    a(class="link" href=`${value.url}`)    #{value.tag} image
+
+                else
+                  div.text-secondary                       #{value}
+
+      //- div(class="card-footer text-center border-0 p-1")
+      div(class="text-center p-2")
+        .btn-group
+          //- button(data-uri=`/manage/images/${}` data-action="" class="btn btn-main btn-white" title="View Details")
+          a(class="btn btn-main btn-white" href=image.url title="View Image" target="_blank")
+            <svg width="1.5em" height="1.5em" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+              <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+              <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+            </svg>
+            span(class="visually-hidden")  View
+
+
+          button(class="btn btn-main btn-white menu-btn" data-id=image.imgId data-uri=`/api/v1/estates/${estateId}/images/${image.imgId}` data-method="DELETE" title="Delete")
+            <svg width="1.5em" height="1.5em" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+              <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+              <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+            </svg>
+            span(class="visually-hidden")  Delete

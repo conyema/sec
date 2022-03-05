@@ -1,0 +1,165 @@
+extends ../layout
+
+block content
+  <main class="main" role="main">
+    <div class="table-title">
+      <div class="row">
+        <div class="col text-center">
+          <h2>Food Menu Form</h2>
+        </div>
+      </div>
+    </div>
+    <div class="main-content container-fluid">
+      <form  id="food-menu-form">
+        <!-- <div class="table-title">
+          <div class="row">
+            <div class="col text-center">
+              <h2>Food Menu Form</h2>
+            </div>
+          </div>
+        </div> -->
+        <div class="row row-cols-1 row-cols-md-2 mt-3">
+          <div class="col col-md-8">
+
+            <div class="form-group row">
+              <label for="category" class="col-sm-4 col-form-label">Category</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="category" name="category">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="name" class="col-sm-4 col-form-label">Name</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="name" name="name">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="unitPrice" class="col-sm-4 col-form-label">Unit Price</label>
+              <div class="col-sm-8">
+                <input type="number" class="form-control" id="unitPrice" name="unitPrice">
+              </div>
+            </div>
+
+            <fieldset class="form-group">
+              <div class="row">
+                <legend class="col-form-label col-3 pt-0">Preservable</legend>
+                <div class="col-9">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="isPreservable" id="isPreservable1" value="yes" checked>
+                    <label class="form-check-label" for="isPreservable1">
+                      Yes
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="isPreservable" id="isPreservable2" value="no">
+                    <label class="form-check-label" for="isPreservable2">
+                      No
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+
+            <div class="form-group row">
+              <label for="saleUnit" class="col-sm-4 col-form-label">Sale Unit</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="saleUnit">
+              </div>
+            </div>
+          </div>
+          <div class="col col-md-4 text-center">
+            <!-- image preview -->
+            <figure>
+              <img id="output" class="img-thumbnail rounded-top" width="200" height="200" />
+              <figcaption>Menu Image</figcaption>
+            </figure>
+
+            <div class="form-group">
+              <label for="image" class="btn col-form-label menu-img-label">Choose Image</label>
+              <div class="col-sm-8">
+                <input type="file" accept="image/*" class="form-control d-none" id="image" name="image" onchange="viewImage(event)" >
+              </div>
+            </div>
+
+            <!-- <div class="form-group row">
+              <label for="saleUnit" class="col-sm-4 col-form-label">Issued By</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="saleUnit">
+              </div>
+            </div> -->
+          </div>
+        </div>
+        <button class="btn btn-lg m-4" type="submit">Reset</button>
+        <button class="btn btn-lg m-4" type="submit">Save</button>
+      </form>
+    </div>
+  </main>
+
+   section
+      div(class="main-content container-fluid")
+        form(id="food-menu-form")
+          div(class="table-title")
+            div(class="row")
+              div(class="col text-center")
+                <h2>Food Menu Form</h2>
+
+          div(class="row row-cols-1 row-cols-md-2 mt-3")
+            div(class="col col-md-8")
+
+              div(class="form-group row")
+                label(for="category" class="col-sm-4 col-form-label")  Category
+                div(class="col-sm-8")
+                  input(type="text" class="form-control" id="category" name="category")
+
+              div(class="form-group row")
+                label(for="name" class="col-sm-4 col-form-label")   Name
+                div(class="col-sm-8")
+                  input(type="text" class="form-control" id="name" name="name")
+
+
+              div(class="form-group row")
+                label(for="unitPrice" class="col-sm-4 col-form-label")    Unit Price
+                div(class="col-sm-8")
+                  input(type="number" class="form-control" id="unitPrice" name="unitPrice")
+
+
+              fieldset(class="form-group")
+                div(class="row")
+                  legend(class="col-form-label col-3 pt-0") Preservable
+                  div(class="col-9")
+                    div(class="form-check")
+                      input(class="form-check-input" type="radio" name="isPreservable" id="isPreservable1" value="yes" checked)
+                      label(class="form-check-label" for="isPreservable1") Yes
+
+                    div(class="form-check")
+                      input(class="form-check-input" type="radio" name="isPreservable" id="isPreservable2" value="no")
+                      label(class="form-check-label" for="isPreservable2") No
+
+              div(class="form-group row")
+                label(for="saleUnit" class="col-sm-4 col-form-label")   Sale Unit
+                div(class="col-sm-8")
+                  input(type="text" class="form-control" id="saleUnit")
+
+
+            div(class="col col-md-4 text-center")
+              // image preview
+              figure
+                img(id="output" class="img-thumbnail rounded-top" width="200" height="200")
+                figcaption      Menu Image
+
+              div(class="form-group")
+                label(for="image" class="btn col-form-label menu-img-label")   Choose Image
+                div(class="col-sm-8")
+                  input(type="file" accept="image/*" class="form-control d-none" id="image" name="image" onchange="viewImage(event)")
+
+
+              div(class="form-group row")
+                label(for="saleUnit" class="col-sm-4 col-form-label")   Issued By
+                div(class="col-sm-8")
+                  input(type="text" class="form-control" id="saleUnit")
+
+
+          button(class="btn btn-lg m-4" type="submit") Reset
+          button(class="btn btn-lg m-4" type="submit") Save
