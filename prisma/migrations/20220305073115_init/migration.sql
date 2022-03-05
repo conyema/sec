@@ -4,7 +4,7 @@ CREATE TABLE `Estate` (
     `title` VARCHAR(191) NOT NULL,
     `description` VARCHAR(191) NULL,
     `location` VARCHAR(191) NOT NULL,
-    `category` VARCHAR(191) NOT NULL,
+    `category` ENUM('land', 'residential', 'industrial', 'commercial') NOT NULL,
     `status` VARCHAR(191) NOT NULL,
     `bedroom` INTEGER NULL,
     `bathroom` INTEGER NULL,
@@ -39,6 +39,7 @@ CREATE TABLE `User` (
     `lastName` VARCHAR(191) NULL,
     `password` VARCHAR(191) NULL,
     `avatar` VARCHAR(191) NULL,
+    `role` ENUM('user', 'admin') NOT NULL DEFAULT 'user',
 
     UNIQUE INDEX `User_email_key`(`email`),
     PRIMARY KEY (`id`)
