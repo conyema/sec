@@ -18,10 +18,19 @@ const selectAllUsers = async (filter = {}, limit = 0) => {
   return prisma.user.findMany({})
 }
 
+const selectOneUser = async (id) => {
+
+  return prisma.user.findUnique({
+    where: {
+      id: Number(id)
+    },
+  })
+}
 
 
 
 module.exports = {
   createUser,
   selectAllUsers,
+  selectOneUser,
 }
