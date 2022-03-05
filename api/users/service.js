@@ -9,7 +9,7 @@ const prisma = new PrismaClient()
 const createUser = async (data) => {
 
   return prisma.user.create({
-    data: { ...data },
+    data,
   })
 }
 
@@ -24,10 +24,15 @@ const selectOneUser = async (id) => {
     where: {
       id: Number(id)
     },
+    include: {
+      estates: true,
+    },
   })
 }
 
 const updateUser = async (id, data) => {
+  // Avoid constrain error on Unique field: Do not modify email
+  delete data.email;
 
   return prisma.user.update({
     where: {

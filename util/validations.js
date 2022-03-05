@@ -8,21 +8,21 @@ const estate = [
     .trim()
     .isString(),
 
-  check('description', 'Description of estate is required')
+  check('description')
     // .not().isEmpty()
     .trim()
     .isString(),
 
-  check('location', 'Location should be an integer')
+  check('location', 'Location is required')
     .not().isEmpty()
     .trim()
     .isString(),
 
-  check('type', 'Estate type is required')
+  check('category', 'Estate category is required')
     .not().isEmpty()
     .trim()
     .isString()
-    .isIn(["Land", "land", "House", "house", "Office", "office"]),
+    .isIn(["residential", "land", "industrial", "commercial"]),
 
   check('status', 'Estate status is required')
     .not().isEmpty()
@@ -34,11 +34,12 @@ const estate = [
     // .isLength({ min: 3 })
     .isURL(),
 
-  // check('floorSpace', '')
-  //   .optional()
-  //   .isNumeric(),
+  check('floorSpace', 'Enter floor space in square meters')
+    .optional()
+    // .toFloat()
+    .isNumeric(),
 
-  // check('balcony', 'Number of balconies should be an integer')
+  // check('balcony', 'Number of balconies should be a whole number')
   //   .optional()
   //   .isInt(),
 
@@ -46,19 +47,21 @@ const estate = [
   //   .optional()
   //   .isNumeric(),
 
-  // check('bedroom', 'Number of bedrooms should be an integer')
+  check('bedroom', 'Number of bedrooms should be a whole number')
+    .optional()
+    .toInt()
+    .isInt(),
+
+  check('bathroom', 'Number of bathrooms should be a whole number')
+    .optional()
+    .toInt()
+    .isInt(),
+
+  // check('garage', 'Number of garage should be a whole number')
   //   .optional()
   //   .isInt(),
 
-  // check('bathroom', 'Number of bathrooms should be an integer')
-  //   .optional()
-  //   .isInt(),
-
-  // check('garage', 'Number of garage should be an integer')
-  //   .optional()
-  //   .isInt(),
-
-  // check('parkingSpace', 'Number of parking spaces should be an integer')
+  // check('parkingSpace', 'Number of parking spaces should be a whole number')
   //   .optional()
   //   .isInt(),
 
@@ -107,7 +110,7 @@ const estate = [
 //   //   .optional()
 //   //   .isNumeric(),
 
-//   // check('balcony', 'Number of balconies should be an integer')
+//   // check('balcony', 'Number of balconies should be a whole number')
 //   //   .optional()
 //   //   .isInt(),
 
@@ -131,6 +134,12 @@ const user = [
     .optional()
     .trim()
     .isString(),
+
+  check('role')
+    .optional()
+    .trim()
+    .isString()
+    .isIn(["user", "admin"]),
 
   check('avatar', 'Enter a link to an avatar or profile photo')
     .optional()

@@ -4,8 +4,8 @@ const { expect } = require('chai');
 // const chai = require("chai");
 // const expect = chai.expect;
 
-const controller = require("../../api/estates/controllers");
-const services = require('../../api/estates/services');
+const controller = require('../../api/estates/controller');
+const service = require('../../api/estates/service');
 
 describe('Estate controller tests:', () => {
   beforeEach(async () => {
@@ -22,9 +22,7 @@ describe('Estate controller tests:', () => {
       const next = sinon.spy();
 
       // create a stub to fake the database query service response
-      sinon.stub(services, 'selectAllEstates').returns(Promise.resolve({
-        rows: [{ estateId: 22, name: 'House', description: 'A two-bed room flat' }],
-      }));
+      sinon.stub(service, 'selectAllEstates').returns(Promise.resolve());
 
       await controller.getAllEstates(req, res, next);
 
@@ -32,33 +30,33 @@ describe('Estate controller tests:', () => {
       expect(res.status.calledOnce).to.equal(true);
       expect(res.json.calledOnce).to.equal(true);
       expect(res.status.args[0][0]).to.equal(200);
-      expect(res.json.args[0][0]).to.be.an('object').that.has.all.keys('status', 'data');
+      expect(res.json.args[0][0]).to.be.an('object').that.has.all.keys('status', 'message', 'data');
     });
 
-    it('should send appropriate response for empty query result', async () => {
-      const req = {};
-      const res = { status: sinon.spy(), json: sinon.spy() };
-      const next = sinon.spy();
+    // it('should send appropriate response for empty query result', async () => {
+    //   const req = {};
+    //   const res = { status: sinon.spy(), json: sinon.spy() };
+    //   const next = sinon.spy();
 
-      sinon.stub(services, 'selectAllEstates').returns(Promise.resolve({
-        rows: [],
-      }));
+    //   sinon.stub(service, 'selectAllEstates').returns(Promise.resolve({
+    //     rows: [],
+    //   }));
 
-      await controller.getAllEstates(req, res, next);
+    //   await controller.getAllEstates(req, res, next);
 
-      // assertions
-      expect(next.calledOnce).to.equal(true);
-      expect(next.args[0][0].status).to.equal(404);
-      expect(next.args[0][0].message).to.equal('No estate available yet');
-    });
+    //   // assertions
+    //   expect(next.calledOnce).to.equal(true);
+    //   expect(next.args[0][0].status).to.equal(404);
+    //   expect(next.args[0][0].message).to.equal('No estate available yet');
+    // });
 
     it('should handle server error', async () => {
       const req = {};
       const res = { status: sinon.spy(), json: sinon.spy() };
       const next = sinon.spy();
 
-      sinon.stub(services, 'selectAllEstates').returns(Promise.reject());
-      // sinon.stub(services, 'selectAllEstates').rejects( new Error('errr'));
+      sinon.stub(service, 'selectAllEstates').returns(Promise.reject());
+      // sinon.stub(service, 'selectAllEstates').rejects( new Error('errr'));
 
       await controller.getAllEstates(req, res, next);
 
@@ -77,9 +75,7 @@ describe('Estate controller tests:', () => {
       const next = sinon.spy();
 
       // create a stub to fake the database query service response
-      sinon.stub(services, 'createEstate').returns(Promise.resolve(
-        [{ estateID: 3, name: 'Harmony Court'}],
-      ));
+      sinon.stub(service, 'createEstate').returns(Promise.resolve());
 
       await controller.postEstate(req, res, next);
 
@@ -87,7 +83,7 @@ describe('Estate controller tests:', () => {
       expect(res.status.calledOnce).to.equal(true);
       expect(res.json.calledOnce).to.equal(true);
       expect(res.status.args[0][0]).to.equal(201);
-      expect(res.json.args[0][0]).to.be.an('object').that.has.all.keys('status', 'data');
+      expect(res.json.args[0][0]).to.be.an('object').that.has.all.keys('status', 'message', 'data');
     });
 
     it('should handle server error', async () => {
@@ -98,7 +94,7 @@ describe('Estate controller tests:', () => {
       };
       const next = sinon.spy();
 
-      sinon.stub(services, 'createEstate').returns(Promise.reject());
+      sinon.stub(service, 'createEstate').returns(Promise.reject());
 
       await controller.postEstate(req, res, next);
 
@@ -107,7 +103,7 @@ describe('Estate controller tests:', () => {
     });
   });
 
-  describe('PATCH /estates/:id', () => {
+  describe('PUT /estates/:id', () => {
     it('should update an Estate', async () => {
       const req = {
         params: { id: '3' },
@@ -120,9 +116,7 @@ describe('Estate controller tests:', () => {
       const next = sinon.spy();
 
       // create a stub to fake the database query service response
-      sinon.stub(services, 'updateEstate').returns(Promise.resolve(
-        [{ estateId: 3, name: 'Harmony Court'}],
-      ));
+      sinon.stub(service, 'updateEstate').returns(Promise.resolve());
 
       await controller.editEstate(req, res, next);
 
@@ -130,30 +124,7 @@ describe('Estate controller tests:', () => {
       expect(res.status.calledOnce).to.equal(true);
       expect(res.json.calledOnce).to.equal(true);
       expect(res.status.args[0][0]).to.equal(200);
-      expect(res.json.args[0][0]).to.be.an('object').that.has.all.keys('status', 'data');
-    });
-
-    it('should not update a non-existent estate', async () => {
-      const req = {
-        params: { id: '122' },
-        body: {},
-      };
-      const res = {
-        status: sinon.spy(),
-        json: sinon.spy()
-      };
-      const next = sinon.spy();
-
-      sinon.stub(services, 'updateEstate').returns(Promise.resolve({
-        rowCount: 0
-      }));
-
-      await controller.editEstate(req, res, next);
-
-      // assertions
-      expect(next.calledOnce).to.equal(true);
-      expect(next.args[0][0].status).to.equal(404);
-      expect(next.args[0][0].message).to.equal('Estate does not exist');
+      expect(res.json.args[0][0]).to.be.an('object').that.has.all.keys('status', 'message', 'data');
     });
 
     it('should handle server error', async () => {
@@ -167,7 +138,7 @@ describe('Estate controller tests:', () => {
       };
       const next = sinon.spy();
 
-      sinon.stub(services, 'updateEstate').returns(Promise.reject());
+      sinon.stub(service, 'updateEstate').returns(Promise.reject());
 
       await controller.editEstate(req, res, next);
 
@@ -188,7 +159,7 @@ describe('Estate controller tests:', () => {
       const next = sinon.spy();
 
       // create a stub to fake the database query service response
-      sinon.stub(services, 'deleteEstate').returns(Promise.resolve({
+      sinon.stub(service, 'deleteEstate').returns(Promise.resolve({
         rowCount: 1,
       }));
 
@@ -201,28 +172,6 @@ describe('Estate controller tests:', () => {
       expect(res.json.args[0][0]).to.be.an('object').that.has.all.keys('status', 'message');
     });
 
-    it('should not delete a non-existent estate', async () => {
-      const req = {
-        params: { id: '122' },
-      };
-      const res = {
-        status: sinon.spy(),
-        json: sinon.spy()
-      };
-      const next = sinon.spy();
-
-      sinon.stub(services, 'deleteEstate').returns(Promise.resolve({
-        rowCount: 0,
-      }));
-
-      await controller.deleteEstate(req, res, next);
-
-      // assertions
-      expect(next.calledOnce).to.equal(true);
-      expect(next.args[0][0].status).to.equal(404);
-      expect(next.args[0][0].message).to.equal('Estate does not exist');
-    });
-
     it('should handle server error', async () => {
       const req = {
         params: { id: '3' },
@@ -233,7 +182,7 @@ describe('Estate controller tests:', () => {
       };
       const next = sinon.spy();
 
-      sinon.stub(services, 'deleteEstate').returns(Promise.reject());
+      sinon.stub(service, 'deleteEstate').returns(Promise.reject());
 
       await controller.deleteEstate(req, res, next);
 
@@ -245,7 +194,7 @@ describe('Estate controller tests:', () => {
   describe('GET /estates/:id', () => {
     it('should fetch an Estate', async () => {
       const req = {
-        params: { id: '3' }
+        estate: { id: '3' }
       };
       const res = {
         status: sinon.spy(),
@@ -254,10 +203,7 @@ describe('Estate controller tests:', () => {
       const next = sinon.spy();
 
       // create a stub to fake the database query service response
-      sinon.stub(services, 'selectOneEstate').returns(Promise.resolve({
-        rowCount: 1,
-        rows: [{ estateId: 3, name: 'House', description: 'A two-bed room apartment' }],
-      }));
+      // sinon.stub(service, 'selectOneEstate').returns(Promise.resolve());
 
       await controller.getOneEstate(req, res, next);
 
@@ -265,43 +211,28 @@ describe('Estate controller tests:', () => {
       expect(res.status.calledOnce).to.equal(true);
       expect(res.json.calledOnce).to.equal(true);
       expect(res.status.args[0][0]).to.equal(200);
-      expect(res.json.args[0][0]).to.be.an('object').that.has.all.keys('status', 'data');
-    });
-
-    it('should handle query for a non-existent estate', async () => {
-      const req = {
-        params: { id: '122' },
-      };
-      const res = {
-        status: sinon.spy(),
-        json: sinon.spy()
-      };
-      const next = sinon.spy();
-
-      sinon.stub(services, 'selectOneEstate').returns(Promise.resolve({
-        rowCount: 0,
-        rows: [],
-      }));
-
-      await controller.getOneEstate(req, res, next);
-
-      // assertions
-      expect(next.calledOnce).to.equal(true);
-      expect(next.args[0][0].status).to.equal(404);
-      expect(next.args[0][0].message).to.equal('Estate does not exist');
+      expect(res.json.args[0][0]).to.be.an('object').that.has.all.keys('status', 'message', 'data');
     });
 
     it('should handle server error', async () => {
       const req = {
-        params: { id: '3' },
+        estate: { id: '3' }
       };
+      // const res = {
+      //   status: sinon.spy(),
+      //   json: sinon.spy()
+      // };
       const res = {
         status: sinon.spy(),
-        json: sinon.spy()
+        // I want to stub the json response to fake a server error
+        json: {}
       };
       const next = sinon.spy();
 
-      sinon.stub(services, 'selectOneEstate').returns(Promise.reject());
+      // Induced server error
+      // sinon.stub(service, 'selectOneEstate').returns(Promise.reject());
+      let error = new Error("fake server error");
+      sinon.stub(res, "json").throws(error);
 
       await controller.getOneEstate(req, res, next);
 
@@ -310,18 +241,19 @@ describe('Estate controller tests:', () => {
     });
   });
 
-  describe('POST /estates/:id/files', () => {
-    it('should upload file of an existing Estate', async () => {
+  describe('POST /estates/:id/images', () => {
+    it('should upload image of an existing Estate', async () => {
       const req = {
         params: { id: '3' },
         files: {
           image: {
             size: 1,
-            path: 'path to image'
+            filepath: '/uploads',
+            mimetype: 'image/png',
           }
         },
         body: {
-          tag: "thumbnail"
+          title: "thumbnail"
         }
       };
       const res = {
@@ -331,52 +263,16 @@ describe('Estate controller tests:', () => {
       const next = sinon.spy();
       const fsSpy = sinon.spy(fs, 'unlink');
       // create a stub to fake the database query service response
-      sinon.stub(services, 'uploadFile').returns(Promise.resolve({
-        rowCount: 1
-      }));
+      sinon.stub(service, 'postImage').returns(Promise.resolve());
 
-      await controller.postFile(req, res, next);
+      await controller.postImage(req, res, next);
 
       // assertions
       expect(res.status.calledOnce).to.equal(true);
       expect(res.json.calledOnce).to.equal(true);
       expect(res.status.args[0][0]).to.equal(200);
       expect(res.json.args[0][0]).to.be.an('object').that.has.all.keys('status', 'message', 'data');
-      expect(fsSpy.calledOnce).to.equal(true);
-    });
-
-    it('should not upload file for a non-existent estate', async () => {
-      const req = {
-        params: { id: '388' },
-        files: {
-          image: {
-            size: 1,
-            path: 'path to image'
-          }
-        }
-        ,
-        body: {
-          tag: "thumbnail"
-        }
-      };
-      const res = {
-        status: sinon.spy(),
-        json: sinon.spy()
-      };
-      const next = sinon.spy();
-      const fsSpy = sinon.spy(fs, 'unlink');
-
-      sinon.stub(services, 'uploadFile').returns(Promise.resolve({
-        rowCount: 0
-      }));
-
-      await controller.postFile(req, res, next);
-
-      // assertions
-      expect(next.calledOnce).to.equal(true);
-      expect(next.args[0][0].status).to.equal(400);
-      expect(next.args[0][0].message).to.equal('Estate does not exist');
-      expect(fsSpy.calledOnce).to.equal(true);
+      // expect(fsSpy.calledOnce).to.equal(true);
     });
 
     it('should not upload an empty image file', async () => {
@@ -384,12 +280,13 @@ describe('Estate controller tests:', () => {
         params: { id: '3' },
         files: {
           image: {
-            size: 0,
-            path: 'path to image'
+            // size: 1,
+            filepath: '/uploads',
+            mimetype: 'image/png',
           }
         },
         body: {
-          tag: "thumbnail"
+          title: "thumbnail"
         }
       };
       const res = {
@@ -399,14 +296,14 @@ describe('Estate controller tests:', () => {
       const next = sinon.spy();
       const fsSpy = sinon.spy(fs, 'unlink');
 
-      sinon.stub(services, 'uploadFile').returns(Promise.resolve());
+      sinon.stub(service, 'postImage').returns(Promise.resolve());
 
-      await controller.postFile(req, res, next);
+      await controller.postImage(req, res, next);
 
       // assertions
       expect(next.calledOnce).to.equal(true);
       expect(next.args[0][0].status).to.equal(400);
-      expect(next.args[0][0].message).to.equal('There is no image to upload');
+      expect(next.args[0][0].message).to.equal('Please upload an image');
       // expect(fsSpy.calledOnce).to.equal(true);
     });
 
@@ -416,11 +313,12 @@ describe('Estate controller tests:', () => {
         files: {
           image: {
             size: 1,
-            path: 'path to image'
+            filepath: '/uploads',
+            mimetype: 'image/png',
           }
         },
         body: {
-          tag: "thumbnail"
+          title: "thumbnail"
         }
       };
       const res = {
@@ -430,21 +328,21 @@ describe('Estate controller tests:', () => {
       const next = sinon.spy();
       const fsSpy = sinon.spy(fs, 'unlink');
 
-      sinon.stub(services, 'uploadFile').returns(Promise.reject());
+      sinon.stub(service, 'postImage').returns(Promise.reject());
 
-      await controller.postFile(req, res, next);
+      await controller.postImage(req, res, next);
 
       // assertions
       expect(next.calledOnce).to.equal(true);
-      expect(fsSpy.calledOnce).to.equal(true);
+      // expect(fsSpy.calledOnce).to.equal(true);
     });
   });
 
-  describe('DELETE /estates/:id/files', () => {
-    it('should delete file of an existing estate ', async () => {
+  describe('DELETE /estates/:id/images/:imgId', () => {
+    it('should delete image of an existing estate ', async () => {
       const req = {
         params: { id: '3' },
-        query: { tag: 'imageKey' }
+        // estate: { tag: 'imageKey' }
       };
       const res = {
         status: sinon.spy(),
@@ -453,40 +351,15 @@ describe('Estate controller tests:', () => {
       const next = sinon.spy();
 
       // create a stub to fake the database query service response
-      sinon.stub(services, 'deleteFile').returns(Promise.resolve({
-        rowCount: 1,
-      }));
+      sinon.stub(service, 'deleteImage').returns(Promise.resolve());
 
-      await controller.deleteFile(req, res, next);
+      await controller.deleteImage(req, res, next);
 
       // assertions
       expect(res.status.calledOnce).to.equal(true);
       expect(res.json.calledOnce).to.equal(true);
       expect(res.status.args[0][0]).to.equal(200);
-      expect(res.json.args[0][0]).to.be.an('object').that.has.all.keys('status', 'message', 'data');
-    });
-
-    it('should not delete file if the estate is non-existent', async () => {
-      const req = {
-        params: { id: '122' },
-        query: { tag: 'imageKey' }
-      };
-      const res = {
-        status: sinon.spy(),
-        json: sinon.spy()
-      };
-      const next = sinon.spy();
-
-      sinon.stub(services, 'deleteFile').returns(Promise.resolve({
-        rowCount: 0,
-      }));
-
-      await controller.deleteFile(req, res, next);
-
-      // assertions
-      expect(next.calledOnce).to.equal(true);
-      expect(next.args[0][0].status).to.equal(404);
-      expect(next.args[0][0].message).to.equal('image does not exist');
+      expect(res.json.args[0][0]).to.be.an('object').that.has.all.keys('status', 'message');
     });
 
     it('should handle server error', async () => {
@@ -500,9 +373,71 @@ describe('Estate controller tests:', () => {
       };
       const next = sinon.spy();
 
-      sinon.stub(services, 'deleteFile').returns(Promise.reject());
+      sinon.stub(service, 'deleteImage').returns(Promise.reject());
 
-      await controller.deleteFile(req, res, next);
+      await controller.deleteImage(req, res, next);
+
+      // assertions
+      expect(next.calledOnce).to.equal(true);
+    });
+  });
+
+  describe('USE /estates/:id', () => {
+    it('should return next handler if matching id exists', async () => {
+      const req = {
+        params: { id: '3' },
+      };
+      const res = {
+        status: sinon.spy(),
+        json: sinon.spy()
+      };
+      const next = sinon.spy();
+
+      // create a stub to fake the database query service response
+      sinon.stub(service, 'selectOneEstate').returns(Promise.resolve({
+        id: 3,
+        title: 'something',
+      }));
+
+      await controller.verifyEstate(req, res, next);
+
+      // assertions
+      expect(next.calledOnce).to.equal(true);
+    });
+
+    it('should send appropriate response if no matching id exists', async () => {
+      const req = {
+        params: { id: '30' },
+      };
+      const res = { status: sinon.spy(), json: sinon.spy() };
+      const next = sinon.spy();
+
+      sinon.stub(service, 'selectOneEstate').returns(Promise.resolve());
+
+      await controller.verifyEstate(req, res, next);
+
+      // assertions
+      // expect(next.calledOnce).to.equal(true);
+      // expect(next.args[0][0].status).to.equal(404);
+      // expect(next.args[0][0].message).to.equal('Estate does not exist');
+
+      expect(res.status.calledOnce).to.equal(true);
+      expect(res.json.calledOnce).to.equal(true);
+      expect(res.status.args[0][0]).to.equal(404);
+      expect(res.json.args[0][0]).to.be.an('object').that.has.all.keys('status', 'message');
+      expect(res.json.args[0][0].message).to.equal('Estate does not exist');
+    });
+
+    it('should handle server error', async () => {
+      const req = {
+        params: { id: '3' },
+      };
+      const res = { status: sinon.spy(), json: sinon.spy() };
+      const next = sinon.spy();
+
+      sinon.stub(service, 'selectOneEstate').returns(Promise.reject());
+
+      await controller.verifyEstate(req, res, next);
 
       // assertions
       expect(next.calledOnce).to.equal(true);
