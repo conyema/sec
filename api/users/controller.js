@@ -68,7 +68,7 @@ const editUser = async (req, res, next) => {
   const { id } = req.params;
   const dataInput = req.body;
 
-  debug(id, dataInput);
+  // debug(id, dataInput);
 
   try {
     const result = await service.updateUser(id, dataInput);
@@ -86,9 +86,30 @@ const editUser = async (req, res, next) => {
   }
 }
 
+const deleteUser = async (req, res, next) => {
+  const { id } = req.params;
+  const imgTag = id;
+
+  try {
+    await service.deleteUser(id);
+    // await service.deleteUser(id, imgTag);
+
+    res.status(200);
+    return res.json({
+      status: 'success',
+      // message: 'User profile and related images deleted',
+      message: 'User profile deleted',
+    });
+  } catch (err) {
+    debug(err);
+    next(err);
+  }
+}
+
 module.exports = {
   postUser,
   getAllUsers,
   getOneUser,
   editUser,
+  deleteUser,
 };

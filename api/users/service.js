@@ -37,6 +37,18 @@ const updateUser = async (id, data) => {
   })
 }
 
+const deleteUser = async (id, tag) => {
+
+  // Delete user images in cloud storage
+  // await removeAllImg(tag);
+
+  return prisma.user.delete({
+    where: {
+      id: Number(id)
+    },
+  })
+}
+
 
 
 module.exports = {
@@ -44,4 +56,5 @@ module.exports = {
   selectAllUsers,
   selectOneUser,
   updateUser,
+  deleteUser,
 }
