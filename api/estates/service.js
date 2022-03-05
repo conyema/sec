@@ -8,7 +8,8 @@ const renameFile = require('../../util/renameFile');
 
 /* Define database and external API calls that concern estates here */
 
-const selectAllEstates = async (filter = {}, limit = 0) => {
+// const selectAllEstates = async (filter = {}, limit = 0) => {
+const selectAllEstates = async () => {
 
   return prisma.estate.findMany({
     select: {

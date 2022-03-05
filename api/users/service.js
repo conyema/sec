@@ -13,7 +13,8 @@ const createUser = async (data) => {
   })
 }
 
-const selectAllUsers = async (filter = {}, limit = 0) => {
+// const selectAllUsers = async (filter = {}, limit = 0) => {
+const selectAllUsers = async () => {
 
   return prisma.user.findMany({})
 }
@@ -42,7 +43,8 @@ const updateUser = async (id, data) => {
   })
 }
 
-const deleteUser = async (id, tag) => {
+// const deleteUser = async (id, tag) => {
+const deleteUser = async (id) => {
 
   // Delete user images in cloud storage
   // await removeAllImg(tag);

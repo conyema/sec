@@ -1,5 +1,5 @@
-const estateList = document.querySelectorAll(".estate-item");
-const imageList = document.querySelectorAll(".img-item");
+// const estateList = document.querySelectorAll(".estate-item");
+// const imageList = document.querySelectorAll(".img-item");
 const menuBtns = document.querySelectorAll(".menu-btn");
 const forms = document.querySelectorAll(".form");
 const msgBox = document.getElementById('msg-box');
@@ -9,7 +9,7 @@ const imgInput = document.getElementById('image');
 const viewImage = (e) => {
   const file = e.currentTarget.files[0];
   const imgPreview = document.getElementById('img-preview');
-	imgPreview.src = URL.createObjectURL(file);
+  imgPreview.src = URL.createObjectURL(file);
 }
 
 /**
@@ -22,12 +22,12 @@ const showStatus = (result) => {
 
   if (errors.length) {
     errors.forEach(err => {
-      errList +=`<list class="text-danger d-block small">[${err.param}] - ${err.msg}</list>`
+      errList += `<list class="text-danger d-block small">[${err.param}] - ${err.msg}</list>`
     });
   }
 
   msgBox.innerHTML = (`
-    <h6 class="text-${ status=="success"? "success" : "danger" }">${status}</h6>
+    <h6 class="text-${status == "success" ? "success" : "danger"}">${status}</h6>
     <p class="small">${message}</p>
     <ul>${errList}</ul>
   `);
@@ -35,8 +35,8 @@ const showStatus = (result) => {
   msgBox.classList.toggle("d-none");
 
   setTimeout(() => {
-		msgBox.classList.toggle("d-none");
-		msgBox.innerHTML = "";
+    msgBox.classList.toggle("d-none");
+    msgBox.innerHTML = "";
   }, 5000);
 }
 
@@ -74,14 +74,14 @@ const showStatus = (result) => {
  * @param {string} uri - location of the resource
  * @param {Object} options - optional AJAX parameters
  */
-const ajaxRequest = async(url, options = {}) => {
+const ajaxRequest = async (url, options = {}) => {
   let response = await fetch(url, options);
   let result = await response.json();
 
   return result;
 }
 
-const handleBtnClick = async(e) => {
+const handleBtnClick = async (e) => {
   // e.preventDefault();
   const { id, method, uri } = e.currentTarget.dataset;
   const entityElem = document.getElementById(id);
@@ -102,7 +102,7 @@ const handleBtnClick = async(e) => {
   }
 }
 
-const handleFormSubmit = async(e) => {
+const handleFormSubmit = async (e) => {
   e.preventDefault();
 
   const form = e.currentTarget;

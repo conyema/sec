@@ -1,4 +1,4 @@
-const fs = require('fs');
+// const fs = require('fs');
 const sinon = require('sinon');
 const { expect } = require('chai');
 // const chai = require("chai");
@@ -261,7 +261,7 @@ describe('Estate controller tests:', () => {
         json: sinon.spy()
       };
       const next = sinon.spy();
-      const fsSpy = sinon.spy(fs, 'unlink');
+      // const fsSpy = sinon.spy(fs, 'unlink');
       // create a stub to fake the database query service response
       sinon.stub(service, 'postImage').returns(Promise.resolve());
 
@@ -294,7 +294,7 @@ describe('Estate controller tests:', () => {
         json: sinon.spy()
       };
       const next = sinon.spy();
-      const fsSpy = sinon.spy(fs, 'unlink');
+      // const fsSpy = sinon.spy(fs, 'unlink');
 
       sinon.stub(service, 'postImage').returns(Promise.resolve());
 
@@ -326,7 +326,7 @@ describe('Estate controller tests:', () => {
         json: sinon.spy()
       };
       const next = sinon.spy();
-      const fsSpy = sinon.spy(fs, 'unlink');
+      // const fsSpy = sinon.spy(fs, 'unlink');
 
       sinon.stub(service, 'postImage').returns(Promise.reject());
 

@@ -1,4 +1,4 @@
-const createError = require("http-errors");
+// const createError = require("http-errors");
 const debug = require("debug")("app:api-user");
 // const { check, validationResult } = require('express-validator');
 
@@ -88,7 +88,7 @@ const editUser = async (req, res, next) => {
 
 const deleteUser = async (req, res, next) => {
   const { id } = req.params;
-  const imgTag = id;
+  // const imgTag = id;
 
   try {
     await service.deleteUser(id);

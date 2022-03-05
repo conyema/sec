@@ -147,7 +147,7 @@ const deleteEstate = async (req, res, next) => {
 
 const postImage = async (req, res, next) => {
   // const { body, params, files, estate, errors = [] } = req;
-  const { body, params, files, estate, errors = [] } = req;
+  const { body, files, estate, errors = [] } = req;
 
   // Obtain (first) image data if available or return an empty object
   const image = Object.values(files)[0] || {};
@@ -155,7 +155,7 @@ const postImage = async (req, res, next) => {
   // Get necessary request data
   const { filepath, size, mimetype } = image;
   const { title } = body;
-  const { id } = params;
+  // const { id } = params;
 
   // const isImage = req.files.image === undefined || req.files.image.size === 0;
   // const isImage = size !== undefined && filepath !== undefined;
@@ -178,7 +178,7 @@ const postImage = async (req, res, next) => {
       });
     }
 
-    const result = await service.postImage(id, filepath, title);
+    const result = await service.postImage(estate.id, filepath, title);
     // const result = await service.postImage(estate, filepath, title);
 
     res.status(200);
