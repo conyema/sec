@@ -27,10 +27,21 @@ const selectOneUser = async (id) => {
   })
 }
 
+const updateUser = async (id, data) => {
+
+  return prisma.user.update({
+    where: {
+      id: Number(id)
+    },
+    data
+  })
+}
+
 
 
 module.exports = {
   createUser,
   selectAllUsers,
   selectOneUser,
+  updateUser,
 }

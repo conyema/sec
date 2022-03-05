@@ -8,6 +8,7 @@ const {
   postUser,
   getAllUsers,
   getOneUser,
+  editUser,
 } = require('./controller');
 
 
@@ -19,8 +20,11 @@ router.post('/', [parseForm, validations.user, validate, postUser]);
 // Fetch all Users
 router.get('/', getAllUsers);
 
-// Fetch an estate
+// Fetch a User
 router.get('/:id', getOneUser);
+
+// Update a User
+router.put('/:id', [parseForm, validations.user, validate, editUser]);
 
 
 module.exports = router;
