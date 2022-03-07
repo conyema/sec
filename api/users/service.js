@@ -31,6 +31,15 @@ const selectOneUser = async (id) => {
   })
 }
 
+const findUserByEmail = async (email) => {
+
+  return prisma.user.findUnique({
+    where: {
+      email
+    },
+  })
+}
+
 const updateUser = async (id, data) => {
   // Avoid constrain error on Unique field: Do not modify email
   delete data.email;
@@ -62,6 +71,7 @@ module.exports = {
   createUser,
   selectAllUsers,
   selectOneUser,
+  findUserByEmail,
   updateUser,
   deleteUser,
 }
