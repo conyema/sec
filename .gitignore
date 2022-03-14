@@ -5,6 +5,8 @@ npm-debug.log
 # Local development
 archive/
 web/
+hostfiles/
+uploads/
 dashboard/index-dev.js
 demoData.js
 app-dev.js
@@ -15,5 +17,3 @@ app-dev.js
 coverage
 bash.exe.stackdump
 .nyc_output
-api/database
-uploads

@@ -125,6 +125,11 @@ const user = [
     .trim()
     .isEmail(),
 
+  check('password', 'A valid password is required')
+    // .optional()
+    .not().isEmpty()
+    .isString(),
+
   check('firstName')
     .optional()
     .trim()
@@ -144,10 +149,6 @@ const user = [
   check('avatar', 'Enter a link to an avatar or profile photo')
     .optional()
     .isURL(),
-
-  check('password')
-    .optional()
-    .isString(),
 ];
 
 const file = [

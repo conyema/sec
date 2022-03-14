@@ -3,6 +3,7 @@ node_modules*
 archive/
 prisma/
 web/
+hostfiles/
 dist
 *.min.js
 *.svg
