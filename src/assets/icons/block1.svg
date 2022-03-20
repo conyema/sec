@@ -1,0 +1,504 @@
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg width="37.411mm" height="37.411mm" version="1.1" viewBox="0 0 37.411 37.411" xmlns="http://www.w3.org/2000/svg" xmlns:osb="http://www.openswatchbook.org/uri/2009/osb">
+ <defs>
+  <meshgradient id="meshgradient6641" x="-234.34523" y="41.488094" gradientUnits="userSpaceOnUse">
+   <meshrow>
+    <meshpatch>
+     <stop stop-color="#fff" path="c 5.11528,0  10.2306,0  15.3458,0"/>
+     <stop stop-color="#040d17" path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#fff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+     <stop stop-color="#040d17" path="c 0,-5.77044  0,-11.5409  0,-17.3113"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 5.11528,0  10.2306,0  15.3458,0"/>
+     <stop stop-color="#fff" path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 5.11528,0  10.2306,0  15.3458,0"/>
+     <stop stop-color="#040d17" path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#fff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 5.11528,0  10.2306,0  15.3458,0"/>
+     <stop stop-color="#fff" path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 5.11528,0  10.2306,0  15.3458,0"/>
+     <stop stop-color="#040d17" path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#ff23ff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 5.11528,0  10.2306,0  15.3458,0"/>
+     <stop stop-color="#fff" path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 5.11528,0  10.2306,0  15.3458,0"/>
+     <stop stop-color="#040d17" path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#fff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 5.11528,0  10.2306,0  15.3458,0"/>
+     <stop stop-color="#fff" path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 5.11528,0  10.2306,0  15.3458,0"/>
+     <stop stop-color="#040d17" path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#fff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 5.11528,0  10.2306,0  15.3458,0"/>
+     <stop stop-color="#fff" path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+   </meshrow>
+   <meshrow>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+     <stop stop-color="#fff" path="c 0,-5.77044  0,-11.5409  0,-17.3113"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#fff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#fff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#fff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#fff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#fff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+   </meshrow>
+   <meshrow>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#fff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+     <stop stop-color="#040d17" path="c 0,-5.77044  0,-11.5409  0,-17.3113"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#fff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#ff26ff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#fff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#fff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+   </meshrow>
+   <meshrow>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+     <stop stop-color="#ff0fff" path="c 0,-5.77044  0,-11.5409  0,-17.3113"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#ff18ff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#ff16ff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#ff15ff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#ff0aff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#ff16ff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+   </meshrow>
+   <meshrow>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#ff24ff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+     <stop stop-color="#040d17" path="c 0,-5.77044  0,-11.5409  0,-17.3113"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#fff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#fff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#fff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#ff24ff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+   </meshrow>
+   <meshrow>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#fff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+     <stop stop-color="#fff" path="c 0,-5.77044  0,-11.5409  0,-17.3113"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#ff21ff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#fff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#fff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#fff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#ff16ff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#fff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#fff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+   </meshrow>
+   <meshrow>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#fff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+     <stop stop-color="#040d17" path="c 0,-5.77044  0,-11.5409  0,-17.3113"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#ff1aff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#fff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#ff18ff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#fff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+   </meshrow>
+   <meshrow>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+     <stop stop-color="#fff" path="c 0,-5.77044  0,-11.5409  0,-17.3113"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#fff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#ff1aff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#ff18ff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#fff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#fff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+   </meshrow>
+   <meshrow>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#fff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+     <stop stop-color="#040d17" path="c 0,-5.77044  0,-11.5409  0,-17.3113"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#fff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#ff1aff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#fff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#fff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+   </meshrow>
+   <meshrow>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+     <stop stop-color="#fff" path="c 0,-5.77044  0,-11.5409  0,-17.3113"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#fff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#fff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#fff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#fff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#040d17" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,5.77044  0,11.5409  0,17.3113"/>
+     <stop stop-color="#fff" path="c -5.11528,0  -10.2306,0  -15.3458,0"/>
+    </meshpatch>
+   </meshrow>
+  </meshgradient>
+  <meshgradient id="meshgradient67177" x="226.78572" y="54.339287" gradientTransform="translate(-221.49 -51.405)" gradientUnits="userSpaceOnUse">
+   <meshrow>
+    <meshpatch>
+     <stop stop-color="#cb4154" path="c 33.2619,0  66.5238,0  99.7857,0"/>
+     <stop stop-color="#081a2d" path="c 0,21.9226  0,43.8452  0,65.7679"/>
+     <stop stop-color="#081a2d" path="c -33.2619,0  -66.5238,0  -99.7857,0"/>
+     <stop stop-color="#081a2d" path="c 0,-21.9226  0,-43.8452  0,-65.7679"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 33.2619,0  66.5238,0  99.7857,0"/>
+     <stop stop-color="#cb4154" path="c 0,21.9226  0,43.8452  0,65.7679"/>
+     <stop stop-color="#081a2d" path="c -33.2619,0  -66.5238,0  -99.7857,0"/>
+    </meshpatch>
+   </meshrow>
+   <meshrow>
+    <meshpatch>
+     <stop path="c 0,21.9226  0,43.8452  0,65.7679"/>
+     <stop stop-color="#081a2d" path="c -33.2619,0  -66.5238,0  -99.7857,0"/>
+     <stop stop-color="#cb4154" path="c 0,-21.9226  0,-43.8452  0,-65.7679"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0,21.9226  0,43.8452  0,65.7679"/>
+     <stop stop-color="#cb4154" path="c -33.2619,0  -66.5238,0  -99.7857,0"/>
+    </meshpatch>
+   </meshrow>
+  </meshgradient>
+  <meshgradient id="meshgradient94143" x="16.630953" y="153.36905" gradientTransform="matrix(.2 0 0 .2 216.24 107.05)" gradientUnits="userSpaceOnUse">
+   <meshrow>
+    <meshpatch>
+     <stop stop-color="#fff" path="c 22.0486,0  43.3412,44.6021  65.3898,44.6012"/>
+     <stop stop-color="#b73239" path="c -0.00209526,22.0486  0.75384,-0.504236  0.75384,21.5445"/>
+     <stop stop-color="#fff" path="c -22.0486,0  1.26091,-4.61905e-06  -20.7866,0.0001"/>
+     <stop stop-color="#b73239" path="c -0.00243067,-22.0487  -45.3593,-44.0974  -45.3571,-66.1458"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 22.0486,-0.000267141  44.8532,-44.6012  66.9018,-44.6012"/>
+     <stop stop-color="#fff" path="c 0,22.0486  -44.6024,44.0972  -44.6012,66.1458"/>
+     <stop stop-color="#b73239" path="c -22.0486,-2.67164e-12  0.504166,-2.67164e-12  -21.5467,-0.0001"/>
+    </meshpatch>
+   </meshrow>
+   <meshrow>
+    <meshpatch>
+     <stop path="c 0,22.0486  3.80952e-07,-0.504114  0.002112,21.5447"/>
+     <stop stop-color="#b73239" path="c -22.0507,-0.000171432  -44.0994,44.6011  -66.148,44.6011"/>
+     <stop stop-color="#fff" path="c 0,-22.0486  45.3584,-44.0972  45.3593,-66.1457"/>
+    </meshpatch>
+    <meshpatch>
+     <stop path="c 0.000167142,22.0486  44.6012,44.0972  44.6012,66.1458"/>
+     <stop stop-color="#fff" path="c -22.0486,0  -44.0972,-44.6017  -66.1458,-44.6012"/>
+    </meshpatch>
+   </meshrow>
+  </meshgradient>
+ </defs>
+ <g transform="translate(-33.833 -253.73)">
+  <rect x="-234.35" y="41.488" width="153.46" height="173.11" fill="url(#meshgradient6641)" style="paint-order:normal"/>
+  <rect x="5.2917" y="2.9345" width="199.57" height="131.54" fill="url(#meshgradient67177)" style="paint-order:normal"/>
+  <rect transform="rotate(46.123)" x="219.56" y="137.72" width="26.458" height="26.458" fill="url(#meshgradient94143)" style="paint-order:normal"/>
+ </g>
+</svg>
