@@ -1,9 +1,7 @@
-const { PrismaClient } = require('@prisma/client');
+const models = require('../../config/sequelize/models')
 
-const prisma = new PrismaClient()
-
-const { removeImg, removeAllImg, uploadImg } = require('../../util/imageStore');
-const renameFile = require('../../util/renameFile');
+const { removeImg, removeAllImg, uploadImg } = require('../../lib/imageStore');
+const renameFile = require('../../lib/renameFile');
 
 
 /* Define database and external API calls that concern estates here */
@@ -11,59 +9,57 @@ const renameFile = require('../../util/renameFile');
 // const selectAllEstates = async (filter = {}, limit = 0) => {
 const selectAllEstates = async () => {
 
-  return prisma.estate.findMany({
-    select: {
-      id: true,
-      title: true,
-      location: true,
-      category: true,
-      status: true,
-      bedroom: true,
-      bathroom: true,
-      // photos: true,
-      photos: {
-        where: {
-          title: "poster",
-        },
-      }
-    },
+  return models.estate.findAll({
+    attributes: [
+      'id',
+      'title',
+      'location',
+      'category',
+      'status',
+      'bedroom',
+      'bathroom',
+    ],
+    include: {
+      model: models.photo,
+      as: 'photos',
+      where: {
+        title: 'poster',
+      },
+      // Left join
+      required: false,
+    }
   })
 }
 
 const selectOneEstate = async (id) => {
 
-  return prisma.estate.findUnique({
+  return models.estate.findOne({
     where: {
       id: Number(id)
     },
+    // include: 'Photo'
     include: {
-      photos: true,
-    },
+      model: models.photo,
+      as: 'photos'
+    }
   })
 }
 
 const createEstate = async (userId, data) => {
 
-  return prisma.estate.create({
+  return models.estate.create({
     // data,
-
-    data: {
-      ...data,
-      author: {
-        connect: { id: userId },
-      },
-    },
+    ...data,
+    authorId: userId,
   })
 }
 
 const updateEstate = async (id, data) => {
 
-
-  return prisma.estate.update({
+  return models.estate.update(data, {
     where: {
       id: Number(id)
     },
-    data
   })
 }
 
@@ -72,7 +68,7 @@ const deleteEstate = async (id, tag) => {
   // Delete all images
   await removeAllImg(tag);
 
-  return prisma.estate.delete({
+  return models.estate.destroy({
     where: {
       id: Number(id)
     },
@@ -80,30 +76,23 @@ const deleteEstate = async (id, tag) => {
 }
 
 
-// const postImage = async (estateId, path, title) => {
-const postImage = async (id, path, title) => {
-
+// const postImage = async (id, path, title) => {
+const postImage = async (estateId, path, title) => {
   const safeTitle = renameFile(title);
-  const imgId = `${safeTitle}-${id}`;
-  const tag = id;
+  const imgId = `${safeTitle}-${estateId}`;
+  const tag = estateId;
 
   // Upload an image with title and ID for unique identification
   const uploadData = await uploadImg(path, imgId, tag);
   const imgData = {
     // title: `${safeTitle} of ${estate.title}`,
     title: `${safeTitle}`,
+    estateId,
     ...uploadData
   };
+  console.log('imgData', imgData);
 
-
-  return prisma.photo.create({
-    data: {
-      ...imgData,
-      estate: {
-        connect: { id: Number(id) },
-      },
-    },
-  })
+  return models.photo.create(imgData);
 }
 
 // const deleteImage = async (id, title) => {
@@ -111,7 +100,7 @@ const deleteImage = async (estate, imgId) => {
 
   await removeImg(imgId);
 
-  return prisma.photo.delete({
+  return models.photo.destroy({
     where: {
       imgId
     },

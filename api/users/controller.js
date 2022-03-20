@@ -1,14 +1,45 @@
-// const createError = require("http-errors");
+const createError = require("http-errors");
 const debug = require("debug")("app:api-user");
+const bcrypt = require('bcrypt');
 // const { check, validationResult } = require('express-validator');
 
 const service = require("./service");
 
 
-const postUser = async (req, res, next) => {
-  const newUser = req.body;
+const verifyUser = async (req, res, next) => {
+  const { id } = req.params;
 
   try {
+    const result = await service.selectOneUser(id);
+
+    // It exists: move to next handler
+    if (result) {
+      req.user = result;
+      return next();
+    }
+
+    // It does not exist
+    res.status(404);
+    return res.json({
+      status: 'error',
+      message: 'User does not exist',
+    });
+  } catch (err) {
+    debug(err);
+    next(err);
+  }
+}
+
+const postUser = async (req, res, next) => {
+  let newUser = req.body;
+  // const { firstName, lastName, email, password } = req.body;
+  let stringPassword = newUser.password;
+
+  try {
+
+    const hashedPassword = await bcrypt.hash(stringPassword, 10);
+    newUser.password = hashedPassword;
+
     const result = await service.createUser(newUser);
 
     res.status(201);
@@ -112,4 +143,5 @@ module.exports = {
   getOneUser,
   editUser,
   deleteUser,
+  verifyUser,
 };

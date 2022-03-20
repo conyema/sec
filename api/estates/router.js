@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-const parseForm = require('../../util/parseForm');
-const validate = require('../../util/validate');
-const validations = require('../../util/validations');
+const parseForm = require('../../lib/parseForm');
+const validate = require('../../lib/validate');
+const validations = require('../../lib/validations');
 const {
   deleteEstate,
   deleteImage,
