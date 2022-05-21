@@ -1,5 +1,5 @@
 let { expect } = require('chai');
-const renameFile = require('../../util/renameFile')
+const renameFile = require('../../lib/renameFile')
 
 describe('Rename file utility:', () => {
   it('should only allow safe characters in a file name', () => {

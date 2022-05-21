@@ -6,6 +6,7 @@ npm-debug.log
 archive/
 web/
 hostfiles/
+hostfiles.zip
 uploads/
 dashboard/index-dev.js
 demoData.js
