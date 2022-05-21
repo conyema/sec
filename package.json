@@ -1,19 +1,20 @@
 {
   "name": "sec",
   "version": "1.0.0",
-  "description": "An API for a Real Estate Agency",
+  "description": "API and backend server for Stella Ebam Consulting",
   "engines": {
     "node": "14.18.3"
   },
   "main": "app.js",
   "scripts": {
-    "lint": "eslint .",
+    "dev": "set DEBUG=api:* & nodemon app-dev.js",
+    "start": "node app.js",
+    "start:pm2": "pm2 start app.js --name sec-api",
+    "stop:pm2": "pm2 stop sec-api",
     "db-migration": "npx sequelize db:migrate",
-    "start": "pm2 start ./app.js --name sec-api",
-    "stop": "pm2 stop sec-api",
-    "dev": "set DEBUG=app:* & nodemon ./app-dev.js",
     "test": "mocha test/**/*.spec.js --exit",
-    "test-dev": "mocha api/tests/**/*.spec.js --exit"
+    "test-dev": "mocha api/tests/**/*.spec.js --exit",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -21,7 +22,8 @@
   },
   "keywords": [
     "node",
-    "express"
+    "express",
+    "sequelize"
   ],
   "author": "onyemachinedum@gmail.com",
   "license": "ISC",
