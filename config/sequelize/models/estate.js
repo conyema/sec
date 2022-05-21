@@ -28,7 +28,22 @@ module.exports = (sequelize, DataTypes) => {
     },
     // floorSpace    Decimal? @db.Decimal(8,2)
     floorSpace: {
-      type: DataTypes.DECIMAL,
+      // type: DataTypes.DECIMAL(8, 2),
+      type: DataTypes.DECIMAL(10, 2),
+    },
+    measure: {
+      type: DataTypes.ENUM,
+      values: ["acre", "hectare", "sq ft", "sq m", "unit", "plot"],
+      defaultValue: "unit",
+      // allowNull: false,
+    },
+    price: {
+      type: DataTypes.DECIMAL(15, 2),
+    },
+    currency: {
+      type: DataTypes.ENUM,
+      values: ["naira", "dollar"],
+      // allowNull: false,
     },
     featured: {
       type: DataTypes.BOOLEAN,

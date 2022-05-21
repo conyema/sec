@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const debug = require('debug')('app:db-sequelize');
+const debug = require('debug')('api:db');
 const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';

@@ -23,6 +23,19 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue: "user",
     },
+    source: {
+      type: DataTypes.ENUM,
+      values: ["local", "google", "facebook", "twitter", "linkedIn"],
+      allowNull: false,
+      // defaultValue: "local",
+    },
+    // lastVisited: {
+    //   type: DataTypes.DATE,
+    //   get: function () {
+    //     return this.getDataValue('lastVisited')
+    //       .toLocaleString('en-GB', { timeZone: 'UTC' });
+    //   },
+    // },
   }, {
     freezeTableName: true,
   })
