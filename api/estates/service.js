@@ -1,25 +1,38 @@
 const models = require('../../config/sequelize/models')
 
-const { removeImg, removeAllImg, uploadImg } = require('../../lib/imageStore');
+
 const renameFile = require('../../lib/renameFile');
+const {
+  removeImg,
+  removeAllImg,
+  uploadImg
+} = require('../../lib/imageStore');
 
 
 /* Define database and external API calls that concern estates here */
 
 // const selectAllEstates = async (filter = {}, limit = 0) => {
-const selectAllEstates = async () => {
+const selectAllEstates = async (offset, limit, filter) => {
+  let queryFilter = {};
+  if (filter.featured) {
+    queryFilter.featured = true;
+  }
 
-  return models.estate.findAll({
+  return models.estate.findAndCountAll({
     attributes: [
       'id',
       'title',
       'location',
       'category',
       'status',
+      'featured',
       'bedroom',
       'bathroom',
+      'createdAt'
     ],
+    where: queryFilter,
     include: {
+      // include photos that are posters
       model: models.photo,
       as: 'photos',
       where: {
@@ -27,7 +40,12 @@ const selectAllEstates = async () => {
       },
       // Left join
       required: false,
-    }
+    },
+    order: [['featured', 'DESC'], ['createdAt', 'DESC']],
+    offset,
+    limit
+    // offset: Number(skip),
+    // limit: Number(max)
   })
 }
 

@@ -1,5 +1,5 @@
 const createError = require("http-errors");
-const debug = require("debug")("app:api-user");
+const debug = require("debug")("api:user");
 const bcrypt = require('bcrypt');
 // const { check, validationResult } = require('express-validator');
 
@@ -41,6 +41,7 @@ const postUser = async (req, res, next) => {
     newUser.password = hashedPassword;
 
     const result = await service.createUser(newUser);
+    // debug(result);
 
     res.status(201);
     return res.json({

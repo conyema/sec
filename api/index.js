@@ -1,7 +1,7 @@
 const express = require("express");
 const estates = require("./estates/router");
 const users = require("./users/router");
-// const auth = require("./auth/router");
+const auth = require("./auth/router");
 // const { connectDB } = require("./db/configMongodb");
 
 const api = express();
@@ -10,9 +10,9 @@ const api = express();
 // connectDB();
 
 // api routes
-api.use('/estates', estates);
-api.use('/users', users);
-// api.use('/auth', auth);
+api.use('/auth', auth);
+api.use('/v1/estates', estates);
+api.use('/v1/users', users);
 
 api.use('*', (req, res) => {
   // res.redirect('/');

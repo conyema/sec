@@ -1,16 +1,22 @@
 // const fs = require('fs');
 // const { readdir } = require('fs/promises');
-const { readdir, unlink } = require('fs').promises;
+const {
+  readdir,
+  unlink
+} = require('fs').promises;
+
 const path = require('path');
 const createError = require("http-errors");
-const debug = require("debug")("app:api-estate");
+const debug = require("debug")("api:estate");
 // const { validationResult } = require('express-validator');
 
 const service = require("./service");
+// const { count } = require('console');
 
 
 const verifyEstate = async (req, res, next) => {
   const { id } = req.params;
+
 
   try {
     const result = await service.selectOneEstate(id);
@@ -36,19 +42,29 @@ const verifyEstate = async (req, res, next) => {
 
 const getAllEstates = async (req, res, next) => {
   // const { page, ...filter } = req.query;
-  const filter = req.query;
+  // const filter = req.query;
+  const { limit = 10, page = 1, ...filter } = req.query;
+  // const limit = max;
+  const offset = (page - 1) * limit;
+
+  debug('hereFilter', filter);
   // debug( filter);
+  // debug('AH AH', Math.round(2.5), limit, skip);
+  // debug("req-detials: ", req.protocol, req.hostname, req.socket);
 
   try {
-    const result = await service.selectAllEstates(filter);
+    const { rows, count } = await service.selectAllEstates(offset, limit, filter);
     // debug('estatesId:', result[1].id);
     // debug('eFilter:', filter);
+    const hasMore = count > (limit * page);
 
     res.status(200);
     return res.json({
       status: 'success',
       message: 'Estates fetched',
-      data: result
+      totalCount: count,
+      hasMore,
+      data: rows,
     });
   } catch (err) {
     debug(err);
