@@ -8,7 +8,7 @@ const express = require("express");
 const debug = require('debug')('api:server');
 const logger = require("morgan");
 const path = require('path');
-const csrf = require('csurf');
+// const csrf = require('csurf');
 const helmet = require("helmet");
 const passport = require("passport");
 const session = require("express-session");
@@ -58,14 +58,15 @@ const sessOptions = {
 app.use(express.static(path.join(__dirname, 'dashboard/src')));
 
 
-// middlewares for production env.
+// Middlewares for production env.
 app.use(helmet());
 app.use(cors());
 app.use(logger('combined'));
 app.use(express.json());
 app.use(
   express.urlencoded({
-    extended: true,
+    // extended: true,
+    extended: false,
   })
 );
 
@@ -74,10 +75,10 @@ app.use(session(sessOptions));
 app.use(passport.initialize());
 app.use(passport.session());
 
-// after session
-app.use(csrf());
+// After session
+// app.use(csrf());
 
-// sub-apps and routes
+// Sub-apps and routes
 // app.use('/v1', api);
 app.use('/manage', dashboard);
 app.use('/', api);
@@ -91,10 +92,10 @@ app.get('*', (req, res) => {
 //   res.json({ message: 'Welcome to the SEC!!!' });
 // });
 
-// default error handler
+// Default error handler
 app.use(errorHandler);
 
-// start app server
+// Start api server
 app.listen(port, () => {
   debug(`Api server running on port ${port}.`);
 });
