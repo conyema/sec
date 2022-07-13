@@ -5,14 +5,16 @@ npm-debug.log
 # Local development
 archive/
 web/
+config/sequelize/seeders
 hostfiles/
-hostfiles.zip
 uploads/
 dashboard/index-dev.js
 demoData.js
 app-dev.js
+*.zip
 *.env
 *.dev
+
 .DS_Store
 
 coverage
