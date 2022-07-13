@@ -2,6 +2,9 @@ const express = require("express");
 const dotenv = require("dotenv");
 const passport = require("passport");
 
+// const parseForm = require('../../lib/parseForm');
+const validateInputs = require('../../lib/validate');
+const { queryAuth } = require('../../lib/validations');
 const {
   login,
   logout,
@@ -17,9 +20,14 @@ const router = express.Router();
  * Routes Definitions
  */
 
-router.post("/local/register", register);
+// Create a user
+// router.post('/', [parseForm, checkUser, validateInputs, postUser]);
+
+// router.post("/local/register", register);
 
 router.post("/local/login",
+  queryAuth,
+  validateInputs,
   passport.authenticate("local", {
     // successRedirect: "/manage",
     failureRedirect: "/manage/login",
@@ -31,7 +39,7 @@ router.post("/local/login",
   login
 );
 
-router.get("/logout", logout);
+router.get("/logout", queryAuth, validateInputs, logout);
 
 
 module.exports = router;

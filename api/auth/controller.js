@@ -2,9 +2,6 @@ const dotenv = require("dotenv");
 const debug = require("debug")("api:auth");
 const bcrypt = require('bcrypt');
 
-const parseForm = require('../../lib/parseForm');
-const validate = require('../../lib/validate');
-const validations = require('../../lib/validations');
 const {
   findUserByEmail,
   createUser
@@ -12,79 +9,97 @@ const {
 
 
 
-const register = async (req, res) => {
-  const { firstName, lastName, email, password } = req.body
+const register = async (req, res, next) => {
+  let newUser = req.body;
+  let plainPassword = newUser.password;
+  const { returnTo } = req.query;
+  // const { referer } = req.headers;
+  // const redirectUrl = returnTo || referer || '/';
 
-  const hashedPassword = await bcrypt.hash(password, 10)
-
-  const data = {
-    email,
-    firstName,
-    lastName,
-    password: hashedPassword
-  }
 
   try {
-    // debug('DATA:', data);
+    const hashedPassword = await bcrypt.hash(plainPassword, 10);
+    newUser.password = hashedPassword;
 
-    const newUser = await createUser(data);
-    debug('newUser:', newUser);
+    const result = await createUser(newUser);
+    // debug('new user:', newUser);
 
-    // res.json({
-    //   status: 'success',
-    //   message: 'user registered',
-    //   data: newUser
-    // });
+    // Redirect URL provided
+    if (returnTo) {
+      return res.redirect(returnTo);
+    }
 
-    res.redirect("/manage/login")
-
+    res.status(201);
+    return res.json({
+      status: 'success',
+      message: 'User account registered',
+      // data: newUser
+    });
   } catch (err) {
     debug(err);
-    // next(err);
+    next(err);
     // req.flash("error", "Error creating a new account. Try a different login method.");
-    res.redirect("/manage/register")
+    // res.redirect("/manage/register")
   }
 };
 
+const login = async (req, res, next) => {
+  const { returnTo } = req.query;
+  // const { referer } = req.headers;
 
-const login = async (req, res) => {
   const authenticated = req.isAuthenticated();
-  debug("authed? - ", authenticated)
+  // const redirectUrl = returnTo || referer || '/';
+
+  // debug("authenticated - ", authenticated)
   res.locals.user = req.user;
   res.locals.verified = authenticated;
 
-  res.redirect('/manage');
+
+  try {
+    // Redirect URL provided
+    if (returnTo) {
+      return res.redirect(returnTo);
+    }
+
+    res.status(200);
+    return res.json({
+      status: 'success',
+      message: 'Login successful'
+    });
+  } catch (err) {
+    debug(err);
+    next(err);
+  }
 };
 
-const logout = (req, res) => {
-  // debug('Session-out', req.session);
-  // req.logOut();
-  req.logout();
-  res.redirect('/');
+const logout = (req, res, next) => {
+  const { returnTo } = req.query;
+  // const { referer } = req.headers;
+
+  // let returnTo = `${req.protocol}://${req.headers.host}`;
+  // const redirectUrl = returnTo || referer || '/';
+
+  // debug('mid', req.headers.referer, returnTo, req.headers.host);
+
+
+  try {
+    req.logout();
+
+    // Redirect URL provided
+    if (returnTo) {
+      return res.redirect(returnTo);
+    }
+
+    res.status(200);
+    return res.json({
+      status: 'success',
+      message: 'Logout successful'
+    });
+  } catch (err) {
+    debug(err);
+    next(err);
+  }
 };
-
-// const logout = (req, res) => {
-//   req.logOut();
-
-//   let returnTo = `${req.protocol}://${req.headers.host}`;
-//   // const port = req.connection.localPort;
-//   const port = req.socket.localPort;
-
-
-//   const logoutURL = new URL(
-//     `https://${process.env.AUTH0_DOMAIN}/v2/logout`
-//   );
-
-//   // const searchString = querystring.stringify({
-//   const searchString = new URLSearchParams({
-//     client_id: process.env.AUTH0_CLIENT_ID,
-//     returnTo: returnTo
-//   });
-
-//   logoutURL.search = searchString;
-
-//   res.redirect(logoutURL);
-// };
 
 
 
