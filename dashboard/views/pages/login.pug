@@ -5,30 +5,44 @@ block content
   section(id="hero" class="hero")
     .container-fluid.container-lg
       //- h1.title.text-center   Estates
-      h1(class="title text-center") Update Estate
+      h1(class="title text-center") Login
 
 
   section.section
     .container-fluid
 
-      <form>
-        <img class="mb-4" src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
-        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+      // Login Form
+      //- form(id="estate-form" class="box-container gform")
+      //- form(
+      //-   id="signup-form"
+      //-   class="form mt-5"
+      //-   data-method="POST"
+      //-   data-uri="/auth/local/login"
+      //- )
+      form(
+        id="signup-form"
+        class="mt-5"
+        method="POST"
+        action=`/auth/local/login?returnTo=${hostUrl}/manage`
+      )
+        .card.container.img-container.py-3
+          p.small.text-muted.fst-italic  * = Required
+          .col
 
-        <div class="form-floating">
-          <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-          <label for="floatingInput">Email address</label>
-        </div>
-        <div class="form-floating">
-          <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-          <label for="floatingPassword">Password</label>
-        </div>
+            //- <img class="mb-4" src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
 
-        <div class="checkbox mb-3">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
-        </div>
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-        <p class="mt-5 mb-3 text-muted">© 2017–2021</p>
-      </form>
+            div(class="input-group mb-4")
+              label(class="input-group-text" for="email")  Email *
+              input(type="email" class="form-control" id="email" name="email" required)
+
+            div(class="input-group mb-4")
+              label(class="input-group-text" for="password")  Password *
+              input(type="password" class="form-control" id="password" name="password" autocomplete="current-password" required)
+
+            div(class="input-group mb-4")
+              button(class="btn btn-main" type="submit") Login
+              //- button(class="btn btn-main" type="reset") Reset
+
+            //- p Not registered yet?
+              a(class="link ms-1" href=`/manage/register` title="Sign Up")   Sign up
+

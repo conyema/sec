@@ -22,7 +22,8 @@ const showStatus = (result) => {
 
   if (errors.length) {
     errors.forEach(err => {
-      errList += `<list class="text-danger d-block small">[${err.param}] - ${err.msg}</list>`
+      // errList += `<list class="text-danger d-block small">[${err.param}] - ${err.msg}</list>`
+      errList += `<list class="text-danger d-block small">[${err}]</list>`
     });
   }
 
@@ -42,7 +43,7 @@ const showStatus = (result) => {
 
 /**
  *  Displays errorss in form submission
- * @param {Array} errorss - A group of form submission errors(s)
+ * @param {Array} errors - A group of form submission errors(s)
  * @param {} errBox - HTML element to display errors(s)
  */
 //  const showErrors = (errors, errBox) => {

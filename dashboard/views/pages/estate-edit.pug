@@ -25,7 +25,7 @@ block content
         id="estate-form"
         class="form mt-5"
         data-method="PUT"
-        data-uri=`/api/v1/estates/${_id}`
+        data-uri=`/v1/estates/${id}`
       )
         .card.container.py-3
           p.small.text-muted.fst-italic  * = Required
@@ -37,75 +37,119 @@ block content
                 input(type="text" class="form-control" id="title" name="title" value=title required)
 
               div(class="input-group mb-4")
+                label(class="input-group-text" for="address")  Address
+                input(type="text" class="form-control" id="address" name="address" value=address)
+
+              div(class="input-group mb-4")
                 label(class="input-group-text" for="location")  Location *
                 input(type="text" class="form-control" id="location" name="location" value=location required)
 
-              div(class="input-group mb-4")
-                label(class="input-group-text" for="type")  Type *
-                input(type="text" class="form-control" id="type" name="type" value=`${type || ""}` required)
+              div(class="mb-4 bg-light p-1")
+                legend(class="col-form-label pt-0") Category *
+                .container
+                  .row.small
+                    div(class="col form-check form-switch")
+                      input(class="form-check-input" type="radio" name="category" id="cat1" value="residential")&attributes({'checked': category == "residential"})
+                      label(class="form-check-label" for="cat1") Residential
+
+                    div(class="col form-check form-switch")
+                      input(class="form-check-input" type="radio" name="category" id="cat2" value="commercial")&attributes({'checked': category == "commercial"})
+                      label(class="form-check-label" for="cat2") Commercial
+
+                    div(class="col form-check form-switch")
+                      input(class="form-check-input" type="radio" name="category" id="cat3" value="industrial")&attributes({'checked': category == "industrial"})
+                      label(class="form-check-label" for="cat3") Industrial
+
+                    div(class="col form-check form-switch")
+                      input(class="form-check-input" type="radio" name="category" id="cat4" value="land")&attributes({'checked': category == "land"})
+                      label(class="form-check-label" for="cat4") Land
 
               div(class="input-group mb-4")
                 label(class="input-group-text" for="status")  Status *
-                input(type="text" class="form-control" id="status" name="status" value=status required)
+                input(type="text" class="form-control" id="status" name="status" value=`${status || ""}` required)
 
               div(class="input-group mb-4")
-                label(class="input-group-text" for="video")  Video Link
-                input(type="url" class="form-control" id="video" name="video" value=video)
+                label(class="input-group-text" for="bedroom")  Bedroom
+                input(type="number" class="form-control" id="bedroom" name="bedroom" value=`${bedroom || ""}`)
 
-              //- div(class="form-check form-switch mb-4")
-                if featured
-                  input(class="form-check-input" type="checkbox" role="switch" id="featured" name="featured" value="true" checked)
-                  input(name="featured" type="hidden" value="false")
-                  label(class="form-check-label" for="featured") featured
-                else
-                  input(class="form-check-input" type="checkbox" role="switch" id="featured" name="featured" value="true")
-                  input(name="featured" type="hidden" value="false")
-                  label(class="form-check-label" for="featured") featured
+              div(class="input-group mb-4")
+                label(class="input-group-text" for="bathroom")  Bathroom
+                input(type="number" class="form-control" id="bathroom" name="bathroom" value=`${bathroom || ""}`)
 
-              div(class="d-flex mb-4")
-                legend(class="col-form-label pt-0") Feature on home page?
-                .col-sm-4.px-2
-                  if featured
-                    div(class="form-check form-switch")
-                      input(class="form-check-input" type="radio" name="featured" id="feat-yes" value="true" checked)
-                      label(class="form-check-label" for="feat-yes") Yes
-                    div(class="form-check form-switch")
-                      input(class="form-check-input" type="radio" name="featured" id="feat-no" value="false")
-                      label(class="form-check-label" for="feat-no") No
-                  else
-                    div(class="form-check form-switch")
-                      input(class="form-check-input" type="radio" name="featured" id="feat-yes" value="true")
-                      label(class="form-check-label" for="feat-yes") Yes
-                    div(class="form-check form-switch")
-                      input(class="form-check-input" type="radio" name="featured" id="feat-no" value="false" checked)
-                      label(class="form-check-label" for="feat-no") No
+              div(class="input-group mb-4")
+                label(class="input-group-text" for="space")  Floor Space
+                input(type="number" class="form-control" id="space" name="floorSpace" step="0.01" value=`${floorSpace || ""}`)
+
+              div(class="input-group mb-4")
+                label(class="input-group-text" for="measure")  Measure
+                input(type="text" class="form-control" id="measure" name="measure" list="measureList" value=`${measure || ""}`)
+                <datalist id="measureList">
+                  <option value="acre">
+                  <option value="hectare">
+                  <option value="sq ft">
+                  <option value="sq m">
+                  <option value="unit">
+                  <option value="plot">
+                </datalist>
+
 
             .col
-              //- div(class="input-group mb-4")
-                label(class="input-group-text" for="features")  Features
-                input(type="text" class="form-control" id="features" name="features" required value=title)
+              div(class="input-group mb-4")
+                label(class="input-group-text" for="price")  Price
+                input(type="number" class="form-control" id="price" name="price" step="0.01" min="0" value=`${price || ""}`)
+
+              div(class="input-group mb-4")
+                label(class="input-group-text" for="currency")  Currency
+                input(type="text" class="form-control" id="currency" name="currency" list="currList" value=`${currency || ""}`)
+                <datalist id="currList">
+                  <option value="naira">
+                  <option value="dollar">
+                </datalist>
+              div(class="input-group mb-4")
+                label(class="input-group-text" for="video")  Video Link
+                input(type="url" class="form-control" id="video" name="video" value=`${video || ""}`)
+
+              div(class="mb-4 bg-light p-1")
+                legend(class="col-form-label pt-0") Feature on home page?
+                .container
+                  .row.small
+                    div(class="col form-check form-switch")
+                      input(class="form-check-input" type="radio" name="featured" id="feat-yes" value="true")&attributes({'checked': featured == true })
+                      label(class="form-check-label" for="feat-yes") Yes
+                    div(class="col form-check form-switch")
+                      input(class="form-check-input" type="radio" name="featured" id="feat-no" value="false")&attributes({'checked': featured == false })
+                      label(class="form-check-label" for="feat-no") No
+
+              div(class="mb-4 bg-light p-1")
+                legend(class="col-form-label pt-0") Publish on website?
+                .container
+                  .row.small
+                    div(class="col form-check form-switch")
+                      input(class="form-check-input" type="radio" name="published" id="publish-yes" value="true")&attributes({'checked': published == true })
+                      label(class="form-check-label" for="publish-yes") Yes
+                    div(class="col form-check form-switch")
+                      input(class="form-check-input" type="radio" name="published" id="publish-no" value="false")&attributes({'checked': published == false })
+                      label(class="form-check-label" for="publish-no") No
 
               div.mb-3
                 label(class="form-label" for="message")   Description
                 textarea(class="form-control form-message" name="description" id="description") #{description}
 
-              div.mb-3
-                label(class="form-label" for="message")   Features
-                textarea(class="form-control form-message" name="features" id="features") #{features}
-                small.text-muted.fst-italic   Delimit features with a comma(,)
-
-              //- div(class="form-floating mb-4")
-                label(class="small muted pt-0" for="message")   Message *
-                textarea(class="form-control form-message" name="message" id="message" required)
-
-              //- div(class="form-floating")
-                textarea(class="form-control form-message" name="message" placeholder="message or question" id="message" required)
-                label(class="small muted pt-0" for="message")   Message*
+              //- div.mb-3
+              //-   label(class="form-label" for="message")   Features
+              //-   textarea(class="form-control form-message" name="features" id="features") #{features}
+              //-   small.text-muted.fst-italic   Delimit features with a comma(,)
 
 
           div(class="input-group mb-4")
             button(class="btn btn-main" type="submit") Send
             button(class="btn btn-main" type="reset") Reset
+            a(class="btn btn-main btn-white" href=`/manage/estates/${id}` title="View Details")
+              <svg width="1.5em" height="1.5em" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+              </svg>
+              span(class="visually-hidden")  View Details
 
           //- div(class="input-group mb-4")
             button(class="btn btn-main" type="submit") Send

@@ -1,0 +1,76 @@
+extends ../layout
+
+block content
+  // Hero
+  section(id="hero" class="hero")
+    .container-fluid.container-lg
+      //- h1.title.text-center   Users
+      h1(class="title text-center") Update user
+
+  // User Edit
+  section.section
+    .container-fluid
+
+      // Back button
+      a(href="/manage/users" class="btn btn-main" title="Back to users")
+        <svg width="2em" height="2em" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+          <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+          <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+        </svg>
+        span(class="align-middle")  Back
+
+      // user Form
+      //- form(id="user-form" class="box-container gform")
+      form(
+        id="user-form"
+        class="form mt-5"
+        data-method="PUT"
+        data-uri=`/v1/users/${id}`
+      )
+        .card.container.py-3
+          p.small.text-muted.fst-italic  * = Required
+
+          .row.row-cols-1.row-cols-md-2.my-4
+            .col
+              div(class="input-group mb-4")
+                label(class="input-group-text" for="firstName")  First Name
+                input(type="text" class="form-control" id="firstName" name="firstName" value=`${firstName || ""}`)
+
+              div(class="input-group mb-4")
+                label(class="input-group-text" for="lastName")  Last Name
+                input(type="text" class="form-control" id="lastName" name="lastName" value=`${lastName || ""}`)
+
+              div(class="input-group mb-4")
+                label(class="input-group-text" for="email")  Email *
+                input(type="email" class="form-control" id="email" name="email" value=`${email || ""}` required)
+
+              div(class="input-group mb-4")
+                label(class="input-group-text" for="password")  Password *
+                input(type="password" class="form-control" id="password" name="password" minlength="8" autocomplete="new-password" title="min 8 characters(including Lowercase, Uppercase, Numbers and Symbols)" required)
+
+              div(class="input-group mb-4 d-none")
+                input(type="text" id="source" name="source" value="basic" hidden)
+
+              //- div(class="input-group mb-4")
+                button(class="btn btn-main" type="submit") Sign Up
+                button(class="btn btn-main" type="reset") Reset
+
+
+          div(class="input-group mb-4")
+            button(class="btn btn-main" type="submit") Send
+            button(class="btn btn-main" type="reset") Reset
+            a(class="btn btn-main btn-white" href=`/manage/users/${id}` title="View Details")
+              <svg width="1.5em" height="1.5em" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+              </svg>
+              span(class="visually-hidden")  View Details
+
+          //- div(class="input-group mb-4")
+            button(class="btn btn-main" type="submit") Send
+
+        //- div(class="")
+          p(id="msg-status" class="alert small p-2 fade-in m-0 d-none" role="alert" aria-live="assertive")
+        //- p(id="msg-status" class="alert small m-0" role="alert" aria-live="assertive")
+        //- .alert(class="alert-danger", role="alert", id="error-group", style="display: none")
+          ul(id="errors")

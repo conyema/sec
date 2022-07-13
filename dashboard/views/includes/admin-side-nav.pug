@@ -12,7 +12,7 @@ div(class="offcanvas-header")
   a(class="navbar-brand m-auto" href="/manage")
     img(
       class="img-fluid"
-      src=`/manage/assets/icons/logo.png`
+      src=`/assets/icons/logo3.png`
       alt="Stella Ebam Consulting"
       width="120"
       height="76"
@@ -36,13 +36,34 @@ div(class="dashboard-container")
         div Estates
 
     li.nav-item
+      a(class="nav-link dashboard-link" href="/manage/users")
+        div
+          <svg width="2em" height="2em" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+            <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+            <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
+            <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+          </svg>
+        div Users
+
+    li.nav-item
+      //- a(class="nav-link dashboard-link" href="/auth/logout")
+      a(class="nav-link dashboard-link" href=`${verified ? `/auth/logout?returnTo=${hostUrl}/manage/login` : "/manage/login"}`)
+        div
+          <svg width="2em" height="2em" fill="currentColor" class="bi" viewBox="0 0 16 16">
+            <path d="M7.5 1v7h1V1h-1z"/>
+            <path d="M3 8.812a4.999 4.999 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812z"/>
+          </svg>
+        //- div Logout
+        div.small #{verified ? "Logout" : "Login"}
+
+    //- li.nav-item
       a(class="nav-link dashboard-link" href="/manage/estates")
         <svg width="2em" height="2em" fill="currentColor" class="bi bi-activity" viewBox="0 0 16 16">
           <path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z"/>
         </svg>
         div Logs
 
-    li.nav-item
+    //- li.nav-item
       a(class="nav-link dashboard-link" href="/manage/estates")
         div
           <svg width="2em" height="2em" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">

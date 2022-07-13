@@ -11,7 +11,7 @@ const dashboard = express();
 dashboard.set('views', path.join(__dirname, 'views/pages'));
 dashboard.set('view engine', 'pug');
 
-dashboard.use(express.static(path.join(__dirname, 'src'), { extensions: ['html'] }));
+// dashboard.use(express.static(path.join(__dirname, 'src'), { extensions: ['html'] }));
 
 // sub-app router
 dashboard.use('/', indexRouter);
