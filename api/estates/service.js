@@ -11,26 +11,24 @@ const {
 
 /* Define database and external API calls that concern estates here */
 
-// const selectAllEstates = async (filter = {}, limit = 0) => {
-const selectAllEstates = async (offset, limit, filter) => {
-  let queryFilter = {};
-  if (filter.featured) {
-    queryFilter.featured = true;
-  }
+const feedAllEstates = async (offset, limit, filter = {}) => {
 
   return models.estate.findAndCountAll({
     attributes: [
       'id',
       'title',
+      'address',
       'location',
       'category',
       'status',
-      'featured',
       'bedroom',
       'bathroom',
+      'price',
+      'currency',
+      'featured',
       'createdAt'
     ],
-    where: queryFilter,
+    where: filter,
     include: {
       // include photos that are posters
       model: models.photo,
@@ -44,8 +42,67 @@ const selectAllEstates = async (offset, limit, filter) => {
     order: [['featured', 'DESC'], ['createdAt', 'DESC']],
     offset,
     limit
-    // offset: Number(skip),
-    // limit: Number(max)
+  })
+}
+
+const feedOneEstate = async (id) => {
+
+  return models.estate.findOne({
+    attributes: { exclude: ['published', 'authorId'] },
+    where: {
+      id: Number(id)
+    },
+    include: [
+      {
+        model: models.photo,
+        as: 'photos'
+      },
+      {
+        model: models.user,
+        as: 'author',
+        attributes: [
+          'firstName',
+          'lastName',
+          'avatar'
+        ]
+      }
+    ]
+  })
+}
+
+// const selectAllEstates = async (filter = {}, limit = 0) => {
+const selectAllEstates = async () => {
+  // let queryFilter = {};
+  // if (filter.featured) {
+  //   queryFilter.featured = true;
+  // }
+
+  return models.estate.findAndCountAll({
+    attributes: [
+      'id',
+      'title',
+      'location',
+      'category',
+      'status',
+      'bedroom',
+      'bathroom',
+      'featured',
+      'createdAt'
+    ],
+    // where: filter,
+    include: {
+      // include photos that are posters
+      model: models.photo,
+      as: 'photos',
+      where: {
+        title: 'poster',
+      },
+      // Left join
+      required: false,
+    },
+    order: [['featured', 'DESC'], ['createdAt', 'DESC']],
+    // offset,
+    // limit
   })
 }
 
@@ -56,10 +113,23 @@ const selectOneEstate = async (id) => {
       id: Number(id)
     },
     // include: 'Photo'
-    include: {
-      model: models.photo,
-      as: 'photos'
-    }
+    include: [
+      {
+        model: models.photo,
+        as: 'photos'
+      },
+      {
+        model: models.user,
+        as: 'author',
+        // attributes: { exclude: ['password', 'role', 'email'] }
+        attributes: [
+          'id',
+          'firstName',
+          'lastName',
+          'avatar'
+        ]
+      }
+    ]
   })
 }
 
@@ -81,10 +151,11 @@ const updateEstate = async (id, data) => {
   })
 }
 
-const deleteEstate = async (id, tag) => {
-
-  // Delete all images
-  await removeAllImg(tag);
+const deleteEstate = async (id, tag, hasImg) => {
+  if (hasImg) {
+    // Delete all images
+    await removeAllImg(tag);
+  }
 
   return models.estate.destroy({
     where: {
@@ -92,7 +163,6 @@ const deleteEstate = async (id, tag) => {
     },
   })
 }
-
 
 // const postImage = async (id, path, title) => {
 const postImage = async (estateId, path, title) => {
@@ -129,6 +199,8 @@ module.exports = {
   createEstate,
   deleteEstate,
   deleteImage,
+  feedAllEstates,
+  feedOneEstate,
   selectAllEstates,
   selectOneEstate,
   updateEstate,

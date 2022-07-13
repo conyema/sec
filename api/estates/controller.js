@@ -19,7 +19,8 @@ const verifyEstate = async (req, res, next) => {
 
 
   try {
-    const result = await service.selectOneEstate(id);
+    const result = req.user ? await service.selectOneEstate(id)
+      : await service.feedOneEstate(id);
 
     // It exists: move to next handler
     if (result) {
@@ -41,22 +42,29 @@ const verifyEstate = async (req, res, next) => {
 }
 
 const getAllEstates = async (req, res, next) => {
-  // const { page, ...filter } = req.query;
-  // const filter = req.query;
   const { limit = 10, page = 1, ...filter } = req.query;
   // const limit = max;
   const offset = (page - 1) * limit;
 
-  debug('hereFilter', filter);
-  // debug( filter);
-  // debug('AH AH', Math.round(2.5), limit, skip);
+  let queryFilter = {
+    published: true
+  };
+
+  if (filter.featured) {
+    queryFilter.featured = true;
+  }
+
+  // debug('hereFilter', filter, queryFilter);
+  // debug('user', req.user);
+
   // debug("req-detials: ", req.protocol, req.hostname, req.socket);
 
   try {
-    const { rows, count } = await service.selectAllEstates(offset, limit, filter);
-    // debug('estatesId:', result[1].id);
-    // debug('eFilter:', filter);
+    const { rows, count } = req.user ? await service.selectAllEstates()
+      : await service.feedAllEstates(offset, limit, queryFilter);
+
     const hasMore = count > (limit * page);
+
 
     res.status(200);
     return res.json({
@@ -77,7 +85,7 @@ const getOneEstate = async (req, res, next) => {
   const { estate } = req;
 
   try {
-    debug('estateId:', estate.id);
+    // debug('estateId:', estate.id);
 
     res.status(200);
     return res.json({
@@ -145,10 +153,12 @@ const editEstate = async (req, res, next) => {
 const deleteEstate = async (req, res, next) => {
   const { id } = req.params;
   const imgTag = id;
+  const hasImg = req.estate.photos[0] ? true : false;
+  debug('has img', hasImg);
 
   try {
     // await service.deleteEstate(id);
-    await service.deleteEstate(id, imgTag);
+    await service.deleteEstate(id, imgTag, hasImg);
 
     res.status(200);
     return res.json({
@@ -188,8 +198,8 @@ const postImage = async (req, res, next) => {
     if (errors.length) {
       res.status(422);
       return res.json({
-        status: 'error',
-        message: 'Ensure your submissions are correct',
+        status: 'failure',
+        message: 'Check your submission for errors',
         errors
       });
     }

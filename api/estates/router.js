@@ -24,7 +24,7 @@ const {
 
 
 /**
- *  User management routes
+ *  Estate management routes
  */
 
 // Fetch all estates
