@@ -33,11 +33,11 @@ const verifyUser = async (req, res, next) => {
 const postUser = async (req, res, next) => {
   let newUser = req.body;
   // const { firstName, lastName, email, password } = req.body;
-  let stringPassword = newUser.password;
+  let plainPassword = newUser.password;
+
 
   try {
-
-    const hashedPassword = await bcrypt.hash(stringPassword, 10);
+    const hashedPassword = await bcrypt.hash(plainPassword, 10);
     newUser.password = hashedPassword;
 
     const result = await service.createUser(newUser);
@@ -46,7 +46,7 @@ const postUser = async (req, res, next) => {
     res.status(201);
     return res.json({
       status: 'success',
-      message: 'User created',
+      message: 'User account registered',
       data: result
     });
   } catch (err) {

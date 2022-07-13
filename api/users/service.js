@@ -11,12 +11,22 @@ const createUser = async (data) => {
 // const selectAllUsers = async (filter = {}, limit = 0) => {
 const selectAllUsers = async () => {
 
-  return models.user.findAll({})
+  return models.user.findAll({
+    // attributes: { exclude: ['password', 'role', 'source', 'email'] }
+    attributes: [
+      'id',
+      'firstName',
+      'lastName',
+      'avatar',
+      'createdAt'
+    ]
+  })
 }
 
 const selectOneUser = async (id) => {
 
   return models.user.findOne({
+    attributes: { exclude: ['password'] },
     where: {
       id: Number(id)
     },
