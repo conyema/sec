@@ -25,9 +25,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     source: {
       type: DataTypes.ENUM,
-      values: ["local", "google", "facebook", "twitter", "linkedIn"],
+      values: ["basic", "google", "facebook", "twitter", "linkedIn"],
       allowNull: false,
-      // defaultValue: "local",
+      // defaultValue: "basic",
     },
     // lastVisited: {
     //   type: DataTypes.DATE,

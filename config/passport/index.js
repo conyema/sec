@@ -9,11 +9,11 @@ function configure(passport) {
     async function (email, password, done) {
       try {
         const currentUser = await userService.findUserByEmail(email);
-        console.log("here", currentUser);
+        // console.log("here", currentUser);
 
         if (!currentUser) {
           // return done(null, false, { message: `User with email ${email} does not exist` });
-          console.log("here1");
+          // console.log("here1");
           return done(null, false);
         }
 
@@ -27,14 +27,14 @@ function configure(passport) {
         // Password does not match
         if (!bcrypt.compareSync(password, currentUser.password)) {
           // return done(null, false, { message: `Incorrect password provided` });
-          console.log("here3");
+          // console.log("here3");
           return done(null, false);
         }
 
         return done(null, currentUser);
 
       } catch (err) {
-        console.log("here4");
+        // console.log("here4");
         return done(err, null);
       }
     }
